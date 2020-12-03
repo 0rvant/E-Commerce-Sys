@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>E-Commerce</title>
+	<link rel="stylesheet" href="style.css">
+	<!-- Google fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+	<!-- ----------------------- Header -------------------------->
+	<div class="header">
+		<div class="container">
+			<div class="navbar">
+			<div class="logo">
+				<!-- change the "images/logo.png" to the desigred image" -->
+				<a href="index.html"><img src="images/logo.png" alt="LOGO" width="125px"></a>
+			</div>
+			<nav>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="">Products</a></li>
+					<li><a href="">About</a></li>
+					<li><a href="">Contact</a></li>
+					<li><a href="account.html">Account</a></li>
+				</ul>
+			</nav>
+			<img src="images\cartIcon.png" alt="cart icon" width="30px" height="30px">
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Account page -->
+	<!-- Account page variables:
+		==>Regesteration form:
+			variableName         :                       Meaning
+			regUserName          :      Entered user name in regesteration form
+			regEmailAddress      :      Entered Email Address in regesteration form
+			regPassword          :      Entered password in regesteration form
+			regSubmitBtn         :      Submitt button in regesteration form
+
+		==>Login form:
+			variableName         :                       Meaning
+			logUserName          :      Entered user name in login form
+			logPassword          :      Entered password in login form
+			loginBtn             :      Submitt button in login form
+	-->
+
+
+
+
+	<div class="account-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-2">
+					<img src="images/mainImage.jpg" width="100%" alt="mainImage">
+				</div>
+				<div class="col-2">
+					<div class="form-container">
+						<div class="form-btn">
+							<span onclick="login()">Login</span>
+							<span onclick="register()">Register</span>
+							<hr id="Indicator">
+						</div>
+
+						<form id="LoginForm">
+							<input type="text" placeholder="User name" name="logUserName">
+							<input type="password" placeholder="Password" name="logPassword">
+							<button type="submit" class="btn" name="loginBtn">Login</button>
+							<a href="">Forgot password</a>
+						</form>
+
+						<form id="RegForm">
+							<input type="text" placeholder="User name" name="regUserName">
+							<input type="email" placeholder="Email address" name="regEmailAddress">
+							<input type="password" placeholder="Password" name="regPassword">
+							<button type="submit" class="btn" name="regSubmitBtn">Register</button>
+						</form>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+	<!-- ----------------------- Footer -------------------------->
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="footer-col-1">
+					<h3>Ask us</h3>
+					<a href="">Frequently asked questions.</a>
+				</div>
+				<div class="footer-col-2">
+					<img src="images\logo.png" alt="logo">
+					<p>Our purpose is to make shopping easier for everyone.</p>
+				</div>	 
+				<div class="footer-col-3">
+					<h3>Useful Links</h3>
+					<ul>
+						<li>list item 1</li>
+						<li>list item 2</li>
+						<li>list item 3</li>
+						<li>list item 4</li>
+					</ul>
+				</div>	
+				<div class="footer-col-4">
+					<h3>Follow us</h3>
+					<ul>
+						<li>Facebook</li>
+						<li>Twitter</li>
+						<li>Instagram</li>
+						<li>YouTube</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- js for toggle form -->
+	<script>
+		var LoginForm = document.getElementById("LoginForm");
+		var RegForm = document.getElementById("RegForm");
+		var Indecator = document.getElementById("Indecator");
+
+		function register(){
+			RegForm.style.transform = "translateX(0px)";
+			LoginForm.style.transform = "translateX(0px)";
+			Indicator.style.transform = "translateX(100px)";
+		}
+
+		function login(){
+			RegForm.style.transform = "translateX(300px)";
+			LoginForm.style.transform = "translateX(300px)";
+			Indicator.style.transform = "translateX(0px)";
+		}
+	</script>
+</body>
+</html>
