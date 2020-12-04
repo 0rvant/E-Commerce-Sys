@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'e_com_db',
         'USER': 'root',
         'PASSWORD': 'e-com123456789',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
