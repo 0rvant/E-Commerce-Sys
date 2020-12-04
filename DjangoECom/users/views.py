@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import redirect
 
 # Create your views here.
 def index(request):
@@ -29,5 +30,6 @@ def account_view(request):
             # your sign up logic goes here
 
 
-def logout_view(request):
-    pass
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
