@@ -9,21 +9,24 @@ def index(request):
 
 
     
-
 def account_view(request):
     if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
+        if request.POST.get('submit') == 'sign_in':
+            # your sign in logic goes here
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = authenticate(request, username=username, password=password)
+         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
-        else:
+         else:
             return render(request, "users/login.html", {
                 "message": "Invalid credentials."
             })
-    return render(request, "users/login.html")
+         return render(request, "users/login.html")
 
+    elif request.POST.get('submit') == 'sign_up':
+            # your sign up logic goes here
 
 
 def logout_view(request):

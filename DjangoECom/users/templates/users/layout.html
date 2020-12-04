@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>E-Commerce</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="{% static 'users/style.css' %}">
 	<!-- Google fonts -->
 	<link rel="preconnect" href="https://fonts.gstatic.com"> 
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
 			<div class="navbar">
 			<div class="logo">
 				<!-- change the "images/logo.png" to the desigred image" -->
-				<a href="index.html"><img src="images/logo.png" alt="LOGO" width="125px"></a>
+				<a href="index.html"><img src="../static/users/images/logo.png" alt="LOGO" width="125px"></a>
 
 			</div>
 			<nav>
@@ -29,7 +29,7 @@
 					<li><a href="account.html">Account</a></li>
 				</ul>
 			</nav>
-			<img src="images\cartIcon.png" alt="cart icon" width="30px" height="30px">
+			<img src="../static/users/images/cartIcon.png" alt="cart icon" width="30px" height="30px">
 			</div>
 
 			<div class="row">
@@ -41,7 +41,7 @@
 				</div>
 				<div class="col-2">
 					<!-- change the "images/mainImage.png" to the desigred image" -->
-					<img src="images/mainImage.jpg" alt="Main page image">
+					<img src="../static/users/images/mainImage.jpg" alt="Main page image">
 				</div>
 			</div>
 		</div>
@@ -49,13 +49,9 @@
 
 
 
+{%block body%}
 
-
-
-
-
-
-
+{%endblock%}
 
 
 	<!-- ----------------------- Footer -------------------------->
