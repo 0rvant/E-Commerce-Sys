@@ -8,7 +8,6 @@ class Customer(models.Model):
     email = models.EmailField(max_length=128, unique=True)
     password = models.CharField(max_length=64)
     phone = models.IntegerField(max_length=12)
-    address = models.CharField(max_length=128)
 
 class Seller(models.Model):
     firstname = models.CharField(max_length=10)
@@ -17,5 +16,3 @@ class Seller(models.Model):
     email = models.EmailField(max_length=128, unique=True)
     password = models.CharField(max_length=64)
     phone = models.IntegerField(max_length=12)
-    address = models.CharField(max_length=128)
-

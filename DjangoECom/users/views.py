@@ -7,47 +7,47 @@ from .models import Customer,Seller
 
 # Create your views here.
 def index(request):
-    pass
+    return render(request, "users/index.html")
 
 
     
 def account_view(request):
     if request.method == "POST":
-        if request.POST.get('submit') == 'sign_in':
+        if request.POST.get('submit') == 'login':
             # your sign in logic goes here
-            username = request.POST["username"]
-            password = request.POST["password"]
+            username = request.POST["logUserName"]
+            password = request.POST["logPassword"]
+            check = request.Post["loguser"]
             user = authenticate(request, username=username, password=password)
-             if user is not None:
+            if user is not None:
                 login(request, user)
                 return HttpResponseRedirect(reverse("index"))
             else:
-                return render(request, "users/login.html", {
+                return render(request, "users/account.html", {
                 "message": "Invalid credentials."
                 })
 
-        elif request.POST.get('submit') == 'sign_up':
+        elif request.POST.get('submit') == 'signup':
                 # your sign up logic goes here
-            firstname=request.POST["firstname"]
-            secondname=request.POST["secondname"]
-            username = request.POST["username"]
-            password1 = request.POST["password1"]
-            password2 =request.POST["password2"]
-            email=request.POST["email"]
-            phone=request.POST["phone"]
-            address=request.POST["address"]
+            firstname=request.POST["regFirstName"]
+            secondname=request.POST["regLastName"]
+            username = request.POST["regUserName"]
+            password1 = request.POST["regPassword"]
+            password2 =request.POST["regReEnteredPassword"]
+            email=request.POST["regEmailAddress"]
+            phone=request.POST["regPhoneNumber"]
+            check = request.Post["reguser"]
 
             if(password1 == password2):
-                customer=Customer.objects.create(username=username,password=password1,phone=phone,address=address,email=email,firstname=firstname,secondname=secondname)
+                customer=Customer.objects.create(username=username, password=password1, phone=phone, email=email, firstname=firstname, secondname=secondname)
                 customer.save()
                 login(request,customer)
             else:
-                return render(request, "users/login.html", {
+                return render(request, "users/account.html", {
                     "message": "Password not match"
                 })
-
-    return render(request, "users/login.html")
+    return render(request, "users/account.html")
 
 def logout(request):
-    auth.logout(request)
+    logout(request)
     return redirect('/')

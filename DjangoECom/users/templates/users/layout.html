@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,36 +23,32 @@
 			</div>
 			<nav>
 				<ul>
-					<li><a href="index.html">Home</a></li>
+					<li><a href="{% url 'index' %}">Home</a></li>
 					<li><a href="">Products</a></li>
 					<li><a href="">About</a></li>
 					<li><a href="">Contact</a></li>
-					<li><a href="account.html">Account</a></li>
+					<li><a href="{% url 'account' %}">Account</a></li>
 				</ul>
 			</nav>
 			<img src="../static/users/images/cartIcon.png" alt="cart icon" width="30px" height="30px">
 			</div>
-
-			<div class="row">
-				<div class="col-2"> 
-					<!-- change h1 and p to the desigred ones-->
-					<h1>Give your workout<br>A new style!</h1>
-					<p>Success isn't always about greatness. It's about consistency. Consistent<br> hard work gains success. Greatness will come.</p>
-					<a href="" class="btn">Explore Now &#8594; </a>
-				</div>
-				<div class="col-2">
-					<!-- change the "images/mainImage.png" to the desigred image" -->
-					<img src="../static/users/images/mainImage.jpg" alt="Main page image">
-				</div>
-			</div>
+			{% block body %}
+			
+			{% endblock %}
 		</div>
 	</div>
 
 
+	<script>
+		{% block script %}
 
-{%block body%}
+		{% endblock %}
+	</script>
 
-{%endblock%}
+
+
+
+
 
 
 	<!-- ----------------------- Footer -------------------------->
@@ -63,7 +60,7 @@
 					<a href="">Frequently asked questions.</a>
 				</div>
 				<div class="footer-col-2">
-					<img src="images\logo.png" alt="logo">
+					<img src="../static/users/images\logo.png" alt="logo">
 					<p>Our purpose is to make shopping easier for everyone.</p>
 				</div>	 
 				<div class="footer-col-3">
