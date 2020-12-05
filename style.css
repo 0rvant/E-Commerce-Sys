@@ -145,13 +145,12 @@ ul{
 	max-width: 300px;
 	padding: 0 20px;
 	position: absolute;
-	top: 130px;
 	transition: transform 1s;
 }
 form input{
 	width: 100%;
 	height: 30px;
-	margin: 10px 0;
+	margin: 5px 0;
 	padding: 0 10px;
 	border: 1px solid #ccc;
 }
@@ -167,9 +166,11 @@ form .btn:focus{
 
 #LoginForm{
 	left: -300px;
+	top: 130px;
 }
 #RegForm{
 	left: 0px;
+	top: 60px;
 }
 form a{
 	font-size: 12px;
