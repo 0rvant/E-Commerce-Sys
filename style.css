@@ -1,3 +1,17 @@
+
+:root{
+	--white: #fff;
+	--black: #000;
+	--darkGray: #555;
+	--orange: #ff523b;
+	--pink: #ffd6d6;
+	--brown: #563434;
+	--gray: #8a8a8a;
+	--lightGray: #ccc;
+}
+
+
+
 *{
 	margin: 0;
 	padding: 0;
@@ -25,10 +39,10 @@ nav ul li{
 }
 a{
 	text-decoration: none;
-	color: #555;
+	color: var(--darkGray);
 }
 p{
-	color: #555;
+	color: var(--darkGray);
 }
 .container{
 	max-width: 1300px;
@@ -57,34 +71,34 @@ p{
 }
 .btn{
 	display: inline-block;
-	background: #ff523b;
-	color: #fff;
+	background: var(--orange);
+	color: var(--white);
 	padding: 8px 30px;
 	margin: 30px 0;
 	border-radius: 30px;
 	transition: background 0.5s;
 }
 .btn:hover{
-	background: #563434;
+	background: var(--brown);
 }
 .header{
 	/* Change the main page background from here */
-	background: radial-gradient(#fff, #ffd6d6);
+	background: radial-gradient(var(--white), var(--pink));
 }
 .header .row{
 	margin-top: 70px;
 }
 .footer{
-	background: #000;
-	color: #8a8a8a;
+	background: var(--black);
+	color: var(--gray);
 	font-size: 14px;
 	padding: 60px 0 20px;
 }
 .footer p{
-	color: #8a8a8a;
+	color: var(--gray);
 }
 .footer h3{
-	color: #fff;
+	color: var(--white);
 	margin-bottom: 20px;
 }
 .footer-col-1, .footer-col-2, .footer-col-3, .footer-col-4{
@@ -117,10 +131,10 @@ ul{
 /* Account page style */
 
 .account-page{
-	background: radial-gradient(#fff, #ffd6d6);
+	background: radial-gradient(var(--white), var(--pink));
 }
 .form-container{
-	background: #fff;
+	background: var(--white);
 	width: 300px;
 	height: 400px;
 	position: relative;
@@ -133,7 +147,7 @@ ul{
 .form-container span{
 	font-weight: bold;
 	padding: 0 10px;
-	color: #555;
+	color: var(--darkGray);
 	cursor: pointer;
 	width: 100px;
 	display: inline-block;
@@ -152,7 +166,7 @@ form input{
 	height: 30px;
 	margin: 5px 0;
 	padding: 0 10px;
-	border: 1px solid #ccc;
+	border: 1px solid var(----lightGray);
 }
 form .btn{
 	width: 100%;
@@ -178,10 +192,19 @@ form a{
 #Indicator{
 	width: 100px;
 	border: none;
-	background: #ff523b;
+	background: var(--orange);
 	height: 3px;
 	margin-top: 8px;
 	transform: translateX(100px);
 	transition: transform 1s;
 }
+
+
+
+
+
+
+
+
+
 
