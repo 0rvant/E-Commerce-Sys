@@ -64,7 +64,7 @@
 					<img src="images/accountimage.svg" width="100%" alt="mainImage">
 				</div>
 				<div class="col-2">
-					<div class="form-container">
+					<div class="form-container" id="form-height">
 						<div class="form-btn">
 							<span onclick="login()" class="txtglowhover">Login</span>
 							<span onclick="register()" class="txtglowhover">Register</span>
@@ -86,6 +86,13 @@
 							<input type="password" placeholder="Password" name="regPassword">
 							<input type="password" placeholder="Re-enter password" name="regReEnteredPassword">
 							<input type="text" placeholder="Phone number" name="regPhoneNumber">
+
+							<label for="cars">Account type:</label>
+							<select name="cars" id="cars" required class="txtglowhover">
+								<option disabled selected value> -- select user type -- </option>
+								<option value="volvo">Seller</option>
+								<option value="saab">Buyer</option>
+							</select>
 							<button type="submit" class="btn" name="regSubmitBtn">Register</button>
 						</form>
 
@@ -145,17 +152,24 @@
 		var LoginForm = document.getElementById("LoginForm");
 		var RegForm = document.getElementById("RegForm");
 		var Indecator = document.getElementById("Indecator");
+		var formHeight = document.getElementById("form-height");
+
+		$('#form-height').click(function(){
+			$(this).animate({height:'300'})
+		});
 
 		function login(){
 			RegForm.style.transform = "translateX(300px)";
 			LoginForm.style.transform = "translateX(300px)";
 			Indicator.style.transform = "translateX(0px)";
+			formHeight.style.height = "350px";
 		}
 
 		function register(){
 			RegForm.style.transform = "translateX(0px)";
 			LoginForm.style.transform = "translateX(0px)";
 			Indicator.style.transform = "translateX(100px)";
+			formHeight.style.height = "450px";
 		}
 
 	</script>
