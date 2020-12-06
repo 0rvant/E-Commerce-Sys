@@ -17,7 +17,7 @@
 			<div class="navbar">
 			<div class="logo">
 				<!-- change the "images/logo.png" to the desigred image" -->
-				<a href="index.html"><img src="images/logo.png" alt="LOGO" width="125px"></a>
+				<a href="index.html"><img src="images/logo.svg" alt="LOGO" width="125px"></a>
 			</div>
 			<nav>
 				<ul>
@@ -28,7 +28,7 @@
 					<li><a href="account.html">Account</a></li>
 				</ul>
 			</nav>
-			<a href="cart.html"><img src="images\cartIcon.png" alt="cart icon" width="30px" height="30px"></a>
+			<a href="cart.html"><img src="images\cartIcon.svg" alt="cart icon" width="30px" height="30px" class="icon"></a>
 			</div>
 		</div>
 	</div>
@@ -66,8 +66,8 @@
 				<div class="col-2">
 					<div class="form-container">
 						<div class="form-btn">
-							<span onclick="login()">Login</span>
-							<span onclick="register()">Register</span>
+							<span onclick="login()" class="txtglowhover">Login</span>
+							<span onclick="register()" class="txtglowhover">Register</span>
 							<hr id="Indicator">
 						</div>
 
@@ -75,7 +75,7 @@
 							<input type="text" placeholder="User name" name="logUserName">
 							<input type="password" placeholder="Password" name="logPassword">
 							<button type="submit" class="btn" name="loginBtn">Login</button>
-							<a href="">Forgot password</a>
+							<a href="" class="txtglowhover">Forgot password</a>
 						</form>
 
 						<form id="RegForm">
@@ -113,8 +113,9 @@
 					<a href="">Frequently asked questions.</a>
 				</div>
 				<div class="footer-col-2">
-					<img src="images\logo.png" alt="logo">
-					<p>Our purpose is to make shopping easier for everyone.</p>
+					<img src="images\logo.svg" alt="logo">
+
+					<p><h2>منـــــكــــــم و الـيــــــكـــــــم</h2></p>
 				</div>	 
 				<div class="footer-col-3">
 					<h3>Useful Links</h3>
@@ -145,17 +146,18 @@
 		var RegForm = document.getElementById("RegForm");
 		var Indecator = document.getElementById("Indecator");
 
+		function login(){
+			RegForm.style.transform = "translateX(300px)";
+			LoginForm.style.transform = "translateX(300px)";
+			Indicator.style.transform = "translateX(0px)";
+		}
+
 		function register(){
 			RegForm.style.transform = "translateX(0px)";
 			LoginForm.style.transform = "translateX(0px)";
 			Indicator.style.transform = "translateX(100px)";
 		}
 
-		function login(){
-			RegForm.style.transform = "translateX(300px)";
-			LoginForm.style.transform = "translateX(300px)";
-			Indicator.style.transform = "translateX(0px)";
-		}
 	</script>
 </body>
 </html>
