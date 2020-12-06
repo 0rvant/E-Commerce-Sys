@@ -7,6 +7,7 @@
 	--c5: #66FCF1;
 	--white: #FFF;
 	--black: #000;
+	--error: #F00;
 }
 
 
@@ -26,6 +27,7 @@ body{
 	padding: 20px;
 }
 
+
 input:focus {
 	outline-color: var(--c5);
 	outline-style: solid;
@@ -35,6 +37,14 @@ input:focus {
 	animation-direction: alternate;
 	box-shadow: 0 0 10px var(--c5);
 }
+
+/*class used to show error in input*/
+.inputerror{
+	box-shadow: 0 0 10px var(--error);
+	outline: solid 1px var(--error);
+}
+
+.sg-input-menu {background-color:black;}
 
 /*
 These filter colors are to change the color of the image to c2
@@ -91,7 +101,7 @@ h1{
 }
 .col-2 img{
 	max-width: 100%;
-	padding: 50px 0;
+	padding: 120px 0;
 }
 .col-2 h1{
 	font-size: 50px;
@@ -132,7 +142,7 @@ h1{
 }
 .header{
 	/* Change the main page background from here */
-	background: radial-gradient(var(--c1), var(--c3));
+	background: radial-gradient(var(--c3), var(--c1));
 }
 
 .navbar a{
@@ -199,7 +209,7 @@ ul{
 /* Account page style */
 
 .account-page{
-	background: radial-gradient(var(--c1), var(--c3));
+	background: radial-gradient(var(--c3), var(--c1));
 }
 .form-container{
 	background: var(--c1);
@@ -263,7 +273,7 @@ form a{
 #Indicator{
 	width: 100px;
 	border: none;
-	background: var(--c4);
+	background: var(--c5);
 	height: 3px;
 	margin-top: 8px;
 	transform: translateX(0px);
