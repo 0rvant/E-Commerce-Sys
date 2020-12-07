@@ -3,8 +3,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import redirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, auth
 from .models import Customer
+
 
 # Create your views here.
 def index(request):
@@ -18,7 +19,7 @@ def account_view(request):
             username = request.POST["logUserName"]
             password = request.POST["logPassword"]
             #authenticate not working
-            user = authenticate(request, username=username, password=password)
+            user = auth.authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
                 return HttpResponseRedirect(reverse("index"))
@@ -39,35 +40,56 @@ def account_view(request):
             check = request.POST["reguser"]
 
             if password1 == password2:
-                user = User.objects.create(
-                    username=username,
-                    password=password1,
-                    email=email,
-                    first_name=firstname,
-                    last_name=secondname)
-                user.save()
-                id = user.id
+                if (len(password1) >= 8):
+                    if (len(phone) == 11) and (phone.isdigit()):
+                        try:
+                            user = User.objects.create_user(
+                                username=username,
+                                password=password1,
+                                email=email,
+                                first_name=firstname,
+                                last_name=secondname)
+                            user.save()
+                            id = user.id
+                        except:
+                            return render(request, "users/account.html", {
+                                "message": "Username already taken." 
+                            })   
 
-                if check == "seller":
+                        try:
+                            if check == "seller":
 
-                    customer = Customer.objects.create(
-                        phone=phone,
-                        isseller=1,
-                       # user_id=id
-                    )
-                    customer.save()
-                    return render(request, "users/account.html")
+                                customer = Customer.objects.create(
+                                    phone=phone,
+                                    isseller=True,
+                                    user_id=id
+                                )
+                                customer.save()
+                                return render(request, "users/account.html")
+                            else:
+                                customer = Customer.objects.create(
+                                    phone=phone,
+                                    isseller=False,
+                                    user_id=id
+                                )
+                                customer.save()
+                                return render(request, "users/account.html")
+                        except:
+                            user.delete()
+                            return render(request, "users/account.html", {
+                                "message": "Please enter your Phone number." 
+                            })
+                    else:
+                        return render(request, "users/account.html", {
+                            "message": "Your Phone number is not correct." 
+                        })                          
                 else:
-                    customer = Customer.objects.create(
-                        phone=phone,
-                        isseller=0,
-                        #user_id=id
-                    )
-                    customer.save()
-                    return render(request, "users/account.html")
+                    return render(request, "users/account.html", {
+                        "message": "Your password must contain at least 8 characters."
+                    })          
             else:
                 return render(request, "users/account.html", {
-                    "message": "Two Passwords not match"
+                    "message": "Passwords not match"
                 })
     return render(request, "users/account.html")
 
