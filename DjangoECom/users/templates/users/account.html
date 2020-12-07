@@ -43,12 +43,15 @@
 							<input type="text" placeholder="User name" name="logUserName">
 							<input type="password" placeholder="Password" name="logPassword">
 							<input type="checkbox" name="loguser" value="seller"><label>Seller</label>
-							<button type="submit" class="btn" name="loginBtn" value="login">Login</button>
+							<button type="submit" class="btn" name="submit" value="login">Login</button>
 							<a href="">Forgot password</a>
 						</form>
 
 						<form id="RegForm" action="{% url 'account' %}" method="post">
 							{% csrf_token %}
+					{%if message%}
+       					 <div> {{ message }} </div>
+    				{% endif %}
 							<input type="text" placeholder="First name" name="regFirstName">
 							<input type="text" placeholder="Last name" name="regLastName">
 							<input type="text" placeholder="User name" name="regUserName">
@@ -56,8 +59,9 @@
 							<input type="password" placeholder="Password" name="regPassword">
 							<input type="password" placeholder="Re-enter password" name="regReEnteredPassword">
 							<input type="text" placeholder="Phone number" name="regPhoneNumber">
-							<input type="checkbox" name="reguser" value="seller"><label>Seller</label> 
-							<button type="submit" class="btn" name="regSubmitBtn" value="signup">Register</button>
+							<input type="checkbox" name="reguser" value="seller"><label>Seller</label>
+							<input type="hidden" name="reguser" value="false">
+							<button type="submit" class="btn" name="submit" value="signup">Register</button>
 						</form>
 
 					</div>

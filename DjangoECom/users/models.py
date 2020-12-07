@@ -1,17 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 # Create your models here.
 class Customer(models.Model):
-    firstname = models.CharField(max_length=10,null=True)
-    secondname = models.CharField(max_length=10,null=True)
-    username = models.CharField(max_length=64, unique=True,null=True)
-    email = models.EmailField(max_length=128, unique=True,null=True)
-    password = models.CharField(max_length=64,null=True)
+    #user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.IntegerField(null=True)
-
-class Seller(models.Model):
-    firstname = models.CharField(max_length=10,null=True)
-    secondname = models.CharField(max_length=10,null=True)
-    username = models.CharField(max_length=64, unique=True,null=True)
-    email = models.EmailField(max_length=128, unique=True,null=True)
-    password = models.CharField(max_length=64,null=True)
-    phone = models.IntegerField(null=True)
+    isseller = models.BinaryField(null=True)
