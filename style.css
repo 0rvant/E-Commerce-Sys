@@ -175,7 +175,7 @@ h1{
 	color: var(--c2);
 }
 .footer h3{
-	color: var(--c1);
+	color: var(--c2);
 	margin-bottom: 20px;
 }
 .footer-col-1, .footer-col-2, .footer-col-3, .footer-col-4{
@@ -292,6 +292,174 @@ form a{
 
 
 
+
+
+
+
+
+
+
+
+
+/* <============================= Cart page style ===============================>*/
+
+.small-container{
+	max-width: 1080px;
+	margin: auto;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+.cart-page{
+	background: radial-gradient(var(--c3), var(--c1));
+}
+table{
+	width: 100%;
+	border-collapse: collapse;
+}
+.cart-info{
+	display: flex;
+	flex-wrap: wrap;
+}
+th{
+	text-align: left;
+	padding: 5px;
+	color: var(--c2);
+	font-weight: normal;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+td{
+	padding: 10px 5px;
+}
+td input{
+	width: 50px;
+	height: 30px;
+	padding: 5px;
+	border: 1px solid var(--c4);
+	color: var(--c1);
+	background: var(--c2);
+}
+/*Remove link */
+td a{
+	color: var(--c4);
+	font-size: 12px;
+}
+td img{
+	width: 80px;
+	height: 80px;
+	margin-right: 10px;
+}
+
+.total-price{
+	display: flex;
+	justify-content: flex-end;	
+}
+
+.total-price table{
+	border-top: 3px solid var(--c2);
+	width: 100%;
+	max-width: 400px;
+}
+td:last-child{
+	text-align: right;
+}
+th:last-child{
+	text-align: right;
+}
+.OrderButton{
+	text-align: center;
+	align-items: center;
+}
+.OrderButton .btn{
+	border: none;
+}
+.OrderButton .btn:focus{
+	outline: none;
+}
+
+
+
+/*-- media query for less than 600 screen size */
+@media only screen and (max-width: 600px){
+	.cart-info p{
+		display: none;
+	}
+}
+
+
+
+
+
+
+
+
+
+/* <============================= Product details page style ================================>*/
+
+.single-product{
+	background: radial-gradient(var(--c3), var(--c1));
+}
+.single-product .col-2 img{
+	padding: 0;
+}
+.single-product .col-2 img{
+	padding: 20px;
+}
+.single-product h4{
+	margin: 20px 0;
+	font-size: 22px;
+	font-weight: bold;
+}
+.single-product select{
+	display: block;
+	padding: 10px;
+	margin-top: 20px;s
+}
+.single-product input{
+	width: 50px;
+	height: 40px;
+	padding-left: 10px;
+	font-size: 20px;
+	margin-right: 10px;
+	border: 1px solid var(--c4);
+	color: var(--c1);
+	background: var(--c2);
+}
+input:focus{
+	outline: none;
+}
+
+
+.small-img-row{
+	display: flex;
+	justify-content: space-between;
+}
+.small-img-col{
+	flex-basis: 24%;
+	cursor: pointer;
+}
+/* Recommended products */
+.row-2 p{
+	color: var(--c4);
+}
+.col-4{
+	margin:  70px 0 ;
+	flex-basis: 25%;
+	padding: 10px;
+	min-width: 200px;
+	margin-bottom: 50px;
+	transition: transform 0.5s;
+}
+.col-4 img{
+	width: 100%;
+}
+.rating .fa{
+	color: var(--c5)
+}
+.col-4:hover{
+	transform: translateY(-20px);
+}
 
 
 
