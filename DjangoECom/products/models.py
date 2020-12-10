@@ -1,35 +1,43 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from .models import Customer
+#from users.models import Customer
 # Create your models here.
-label_choices = (
-    ('S', 'Standard'),
-    ('N', 'New'),
-    ('B', 'Best Selling')
-)
-
-
-class Category(models.Model):
-    pass
 class Product(models.Model):
+    label_choices = (
+        ('S', 'Standard'),
+        ('N', 'New'),
+        ('B', 'Best Selling')
+    )
+    category_choices = (
+        ('C', 'Clothes'),
+        ('M', 'Mobiles'),
+        ('T', 'TVs')
+    )
+    seller = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField(blank=False)
-    image = models.ImageField()
-    description = models.TextField(max_length=256, null=True) 
-    review = models.IntegerField()
+    quantity = models.IntegerField()    
     discount_price = models.FloatField(null=True, blank=True)
-    quantity = models.IntegerField()
-    label = models.CharField(choices=label_choices, max_length=1)
-    category = models.ManyToManyField(Category, related_name="category_name")
-    seller = models.ForeignKey(User, related_name="seller_name", on_delete=models.CASCADE)
+    description = models.TextField(max_length=500, null=True)
+    image = models.ImageField(blank=True, null=True)
+    date_created = models.DateField(auto_now_add=True, null=True)
+    label = models.CharField(choices=label_choices, max_length=1, default='S')
+    category = models.CharField(choices=category_choices, max_length=2, null=True)
+    review = models.FloatField(default=0)
 
     def __str__(self):
         return self.name
-    
-class OrderProduct(models.Model):
-    #product = models.ForeignKey(Product, related_name="")
-    pass
 
+class Cart(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.product.name
 
 class Order(models.Model):
-    pass
+    customer = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    order = models.ManyToManyField(Cart)
+    start_date = models.DateField(auto_now_add=True, null=True)
+    ordered_date = models.DateField(null=True)
+    ordered = models.BooleanField(default=False)
+    def __str__(self):
+        return self.customer.username
