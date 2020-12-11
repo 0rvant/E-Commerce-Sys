@@ -380,6 +380,48 @@ th:last-child{
 
 
 
+
+/*-------------------------------All Products-------------------------------------*/
+.all-product{
+	background: radial-gradient(var(--c3), var(--c1));
+}
+.btn_allproducts{
+	display: inline-block;
+	background: var(--c4);
+	color: var(--c1);
+	padding: 3px 15px;
+	margin: 1px 0;
+	border-radius: 10px;
+	transition: background 0.5s;
+	animation-name: btnHoverout;
+	animation-duration: 0.5s;
+	animation-direction: revert;
+}
+.row_allproducts{
+    text-align:center;
+	padding: 10px;
+}
+.page-btn{
+    text-align: center;
+    padding: 10px;
+}
+.page-btn span{
+    display: inline-block;
+    border: 1px solid white;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+.page-btn span:hover{
+    background: black;
+    border: 1px solid aqua;
+    color: aqua;
+}
+
+
 /*-- media query for less than 600 screen size */
 @media only screen and (max-width: 600px){
 	.cart-info p{
@@ -414,7 +456,7 @@ th:last-child{
 .single-product select{
 	display: block;
 	padding: 10px;
-	margin-top: 20px;s
+	margin-top: 20px;
 }
 .single-product input{
 	width: 50px;
@@ -439,7 +481,7 @@ input:focus{
 	flex-basis: 24%;
 	cursor: pointer;
 }
-/* Recommended products */
+/* ---------Recommended products--------- */
 .row-2 p{
 	color: var(--c4);
 }
@@ -460,7 +502,3 @@ input:focus{
 .col-4:hover{
 	transform: translateY(-20px);
 }
-
-
-
-
