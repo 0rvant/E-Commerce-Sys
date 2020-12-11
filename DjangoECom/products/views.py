@@ -10,7 +10,10 @@ def index(request):
 
 
 def products(request):  #Products_Store
-    pass
+    products = Product.objects.all()
+    context = {'products':products}
+    return render(request,'store/store.html',context)
+
 
 def cart(request):
     if request.user.is_authenticated:
@@ -27,5 +30,7 @@ def cart(request):
 
 
 def checkout(request):
-    pass
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order,created = Order.objects.get_or_create(customer=customer,complete=False)
 
