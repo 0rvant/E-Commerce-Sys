@@ -24,8 +24,7 @@
 
 {% block body %}
 
-	<div class="account-page">
-		<div class="container">
+
 			<div class="row">
 				<div class="col-2">
 					<img src="../static/users/images/accountimage.svg" width="100%" alt="mainImage">
@@ -42,15 +41,12 @@
 							{% csrf_token %}
 							<input type="text" placeholder="User name" name="logUserName">
 							<input type="password" placeholder="Password" name="logPassword">
-							<button type="submit" class="btn" name="loginBtn" value="login">Login</button>
-							<a href="" class="txtglowhover">Forgot password</a>
+							<button type="submit" class="btn" name="submit" value="login">Login</button>
+							<a href="{% url 'reset_password' %}" class="txtglowhover">Forgot password</a>
 						</form>
 
 						<form id="RegForm" action="{% url 'account' %}" method="post" autocomplete="off">
 							{% csrf_token %}
-					{%if message%}
-       					 <div> {{ message }} </div>
-    				{% endif %}
 							<input type="text" placeholder="First name" name="regFirstName">
 							<input type="text" placeholder="Last name" name="regLastName">
 							<input type="text" placeholder="User name" name="regUserName">
@@ -58,13 +54,12 @@
 							<input type="password" placeholder="Password" name="regPassword">
 							<input type="password" placeholder="Re-enter password" name="regReEnteredPassword">
 							<input type="text" placeholder="Phone number" name="regPhoneNumber">
-							<label for="cars">Account type:</label>
-							<select name="cars" id="cars" required class="txtglowhover">
+							<label for="accountType">Account type:</label><select name="accountType" id="accountType" required class="txtglowhover">
 								<option disabled selected value> -- select user type -- </option>
-								<option value="volvo">Seller</option>
-								<option value="saab">Buyer</option>
+								<option value="seller">Seller</option>
+								<option value="buyer">Buyer</option>
 							</select>
-							<button type="submit" class="btn" name="regSubmitBtn" value="signup">Register</button>
+							<button type="submit" class="btn" name="submit" value="signup">Register</button>
 						</form>
 
 					</div>
@@ -73,8 +68,7 @@
     				{% endif %}
 				</div>
 			</div>
-		</div>
-	</div>
+
 
 {% endblock %}
 

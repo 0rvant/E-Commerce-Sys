@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import redirect
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User, auth, Group
 from .models import Customer
 
 
@@ -37,7 +37,7 @@ def account_view(request):
             password2 = request.POST["regReEnteredPassword"]
             email = request.POST["regEmailAddress"]
             phone = request.POST["regPhoneNumber"]
-            check = request.POST["reguser"]
+            check = request.POST["accountType"]
 
             if password1 == password2:
                 if (len(password1) >= 8):
@@ -58,7 +58,8 @@ def account_view(request):
 
                         try:
                             if check == "seller":
-
+                                group = Group.objects.get(name='seller')
+                                user.groups.add(group)
                                 customer = Customer.objects.create(
                                     phone=phone,
                                     isseller=True,
@@ -66,7 +67,9 @@ def account_view(request):
                                 )
                                 customer.save()
                                 return render(request, "users/account.html")
-                            else:
+                            elif (check == "buyer"):
+                                group = Group.objects.get(name='customer')
+                                user.groups.add(group)
                                 customer = Customer.objects.create(
                                     phone=phone,
                                     isseller=False,

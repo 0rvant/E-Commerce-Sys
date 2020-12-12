@@ -9,15 +9,13 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-
 	<!-- ----------------------- Header -------------------------->
 	<div class="header">
 		<div class="container">
 			<div class="navbar">
 			<div class="logo">
 				<!-- change the "images/logo.png" to the desigred image" -->
-				<a href="index.html"><img src="../static/users/images/logo.svg" alt="LOGO" width="125px"></a>
+				<a href="index.html"><img src="../../static/users/images/logo.svg" alt="LOGO" width="125px"></a>
 
 			</div>
 			<nav>
@@ -29,18 +27,16 @@
 					<li><a href="{% url 'account' %}">Account</a></li>
 				</ul>
 			</nav>
-			<a href="cart.html"><img src="../static/users/images/cartIcon.svg" alt="cart icon" width="30px" height="30px" class="icon"></a>
+			<a href="cart.html"><img src="../../static/users/images/cartIcon.svg" alt="cart icon" width="30px" height="30px" class="icon"></a>
 			</div>
-
-	
+			{% block body %}
 		
+			{% endblock %}
 		</div>
 	</div>
 
 
-{% block body %}
-	
-{% endblock %}
+
 
 
 	<script>
@@ -64,7 +60,7 @@
 					<a href="">Frequently asked questions.</a>
 				</div>
 				<div class="footer-col-2">
-					<img src="../static/users/images/logo.svg" alt="logo">
+					<img src="../../static/users/images/logo.svg" alt="logo">
 					<p><h2>منـــــكــــــم و الـيــــــكـــــــم</h2></p>
 				</div>	 
 				<div class="footer-col-3">
