@@ -28,26 +28,25 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-2">
-					<img src="../static/users/images/mainImage.jpg" width="100%" alt="mainImage">
+					<img src="../static/users/images/accountimage.svg" width="100%" alt="mainImage">
 				</div>
 				<div class="col-2">
-					<div class="form-container">
+					<div class="form-container" id="form-height">
 						<div class="form-btn">
-							<span onclick="login()">Login</span>
-							<span onclick="register()">Register</span>
+							<span onclick="login()" class="txtglowhover">Login</span>
+							<span onclick="register()" class="txtglowhover">Register</span>
 							<hr id="Indicator">
 						</div>
 
-						<form id="LoginForm" action="{% url 'account' %}" method="post">
+						<form id="LoginForm" action="{% url 'account' %}" method="post" autocomplete="off">
 							{% csrf_token %}
 							<input type="text" placeholder="User name" name="logUserName">
 							<input type="password" placeholder="Password" name="logPassword">
-							<input type="checkbox" name="loguser" value="seller"><label>Seller</label>
 							<button type="submit" class="btn" name="loginBtn" value="login">Login</button>
-							<a href="">Forgot password</a>
+							<a href="" class="txtglowhover">Forgot password</a>
 						</form>
 
-						<form id="RegForm" action="{% url 'account' %}" method="post">
+						<form id="RegForm" action="{% url 'account' %}" method="post" autocomplete="off">
 							{% csrf_token %}
 							<input type="text" placeholder="First name" name="regFirstName">
 							<input type="text" placeholder="Last name" name="regLastName">
@@ -56,7 +55,12 @@
 							<input type="password" placeholder="Password" name="regPassword">
 							<input type="password" placeholder="Re-enter password" name="regReEnteredPassword">
 							<input type="text" placeholder="Phone number" name="regPhoneNumber">
-							<input type="checkbox" name="reguser" value="seller"><label>Seller</label> 
+							<label for="cars">Account type:</label>
+							<select name="cars" id="cars" required class="txtglowhover">
+								<option disabled selected value> -- select user type -- </option>
+								<option value="volvo">Seller</option>
+								<option value="saab">Buyer</option>
+							</select>
 							<button type="submit" class="btn" name="regSubmitBtn" value="signup">Register</button>
 						</form>
 
@@ -78,16 +82,19 @@
 	var LoginForm = document.getElementById("LoginForm");
 	var RegForm = document.getElementById("RegForm");
 	var Indecator = document.getElementById("Indecator");
+	var formHeight = document.getElementById("form-height");
 
 	function login(){
 		RegForm.style.transform = "translateX(300px)";
 		LoginForm.style.transform = "translateX(300px)";
 		Indicator.style.transform = "translateX(0px)";
+		formHeight.style.height = "350px";
 	}
 	function register(){
 		RegForm.style.transform = "translateX(0px)";
 		LoginForm.style.transform = "translateX(0px)";
 		Indicator.style.transform = "translateX(100px)";
+		formHeight.style.height = "450px";
 	}	
 {% endblock %}
 </body>
