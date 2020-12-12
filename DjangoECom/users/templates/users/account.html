@@ -48,6 +48,9 @@
 
 						<form id="RegForm" action="{% url 'account' %}" method="post" autocomplete="off">
 							{% csrf_token %}
+					{%if message%}
+       					 <div> {{ message }} </div>
+    				{% endif %}
 							<input type="text" placeholder="First name" name="regFirstName">
 							<input type="text" placeholder="Last name" name="regLastName">
 							<input type="text" placeholder="User name" name="regUserName">
@@ -97,5 +100,3 @@
 		formHeight.style.height = "450px";
 	}	
 {% endblock %}
-</body>
-</html>
