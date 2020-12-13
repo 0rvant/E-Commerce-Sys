@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'products/main.html' %}
+{% load static%}
+{% block content %}
+<div class="small-container">
+ 		<div class="row">
+			{% for product in products %}
+ 			<div class="col-4">
+				<a href="productDetails.html"><img  src="{{product.imageURL}}"></a>
+ 				<h4>{{product.name}}</h4>
+				<div class="rating" >
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+					<a href="" class="btn_allproducts">add to cart</a>
+				</div>
+ 				<p>{{product.price}} LE.</p>
+ 			</div>
+			{% endfor %}
+ 		</div>
+ 	</div>
+{% endblock content %}

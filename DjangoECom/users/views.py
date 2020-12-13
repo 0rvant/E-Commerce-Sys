@@ -5,13 +5,13 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.models import User, auth, Group
 from .models import Customer
-
-
+from products.decorators import unauthenticated_user
+from django.contrib.auth import logout as django_logout
 # Create your views here.
 def index(request):
     return render(request, "users/index.html")
 
-
+@unauthenticated_user
 def account_view(request):
     if request.method == "POST":
         if request.POST['submit'] == 'login':
@@ -97,5 +97,5 @@ def account_view(request):
     return render(request, "users/account.html")
 
 def logout(request):
-    logout(request)
-    return redirect('/')
+    django_logout(request)
+    return render(request, "users/account.html")
