@@ -18,7 +18,8 @@
 			<div class="navbar">
 			<div class="logo">
 				<!-- change the "images/logo.png" to the desigred image" -->
-				<a href="index.html"><img src="images/logo.svg" alt="LOGO" width="125px"></a>
+				<a href="index.html"><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+					<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_t8je5sxg.json"  background="transparent"  speed="1"  style="width: 120px; "    autoplay></lottie-player></a>
 			</div>
 			<nav>
 				<ul>
@@ -37,40 +38,43 @@
 
 <!----- All Products ------>
 <div class="all-product">
-	
-	<br><br><br>
+	<br>
     <h2 class="row row-2"> All Products</h2>
-    <div class="row_allproducts">		
-					<li><a href="">Shirts</a></li>
-					<li><a href="">Pants</a></li>
-					<li><a href="">Shoes</a></li>
+    <div class="row_allproducts">
+		<label for="productsCategory">Category:</label>
+		<select name="productsCategory" id="productsCategory" required class="txtglowhover">
+			<option value="all products">All products</option>
+			<option value="shirts">Shirts</option>
+			<option value="pants">Pants</option>
+			<option value="shoes">Shoes</option>
+		</select>
     </div>
 	<div class="small-container">
  		<div class="row">
  			<div class="col-4">
- 				<img src="images/Product2Photo1.jpg">
+				<a href="productDetails.html"><img  src="images/Product2Photo1.jpg"></a>
  				<h4>Red Printed T-Shirt</h4>
- 				<div class="rating">
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
+				<div class="rating" >
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
 					<i class="fa fa-star-o"></i>
-                    <a href="" class="btn_allproducts">add to cart</a>
- 				</div>
+					<i class="fa fa-star-o"></i>
+					<a href="" class="btn_allproducts">add to cart</a>
+				</div>
  				<p>150.00 L.E.</p>
  			</div>
-  			<div class="col-4">
+  			<div class="col-4" id="starRating1">
  				<img src="images/Product3Photo1.jpg">
  				<h4>Red Printed T-Shirt</h4>
- 				<div class="rating">
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
-					<i class="fa fa-star-half-o"></i>
+				<div class="rating" >
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
 					<i class="fa fa-star-o"></i>
-                    <a href="" class="btn_allproducts">add to cart</a>
- 				</div>
+					<i class="fa fa-star-o"></i>
+					<a href="" class="btn_allproducts">add to cart</a>
+				</div>
  				<p>220.00 L.E.</p>
  			</div>
  			 <div class="col-4">
@@ -212,6 +216,7 @@
         <span>4</span>
         <span>&#8594;</span>
     </div>
+	<br>
 </div>
 
 

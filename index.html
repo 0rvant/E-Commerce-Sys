@@ -17,27 +17,40 @@
 			<div class="navbar">
 			<div class="logo">
 				<!-- change the "images/logo.png" to the desigred image" -->
-				<a href="index.html"><img src="images/logo.svg" alt="LOGO" width="125px"></a>
-
+<!--				animated logo is added 12/12-->
+				<a href="index.html"><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+					<script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+					<lottie-player id="logoanimation" src="https://assets10.lottiefiles.com/packages/lf20_t8je5sxg.json"  background="transparent"  speed="1"  style="width: 120px; "    autoplay></lottie-player></a>
 			</div>
+				<!--					navbar was edited 12/12-->
 			<nav>
 				<ul>
 					<li><a href="index.html">Home</a></li>
 					<li><a href="products.html">Products</a></li>
+					<li><a href="sellerDashboard.html">Dashboard</a></li>
 					<li><a href="">About</a></li>
 					<li><a href="">Contact</a></li>
 					<li><a href="account.html">Account</a></li>
+					<li><a href="cart.html"><img src="images\cartIcon.svg" alt="cart icon" style="position: relative; transform: translateY(6px)" width="30px"class="icon"></a></li>
+					<li><img src="images/product1.jpg" alt="profile pic" id="SellerImg" onclick="dropMenu()">
+						<ul id="navDropdownMenu">
+							<li><a href="wishlist.html">Wishlist</a> </li>
+							<li>Help</li>
+							<li>Edit Profile</li>
+							<hr>
+							<li><a href="">Logout</a></li>
+						</ul>
+					</li>
 				</ul>
 			</nav>
-			<a href="cart.html"><img src="images\cartIcon.svg" alt="cart icon" width="30px" height="30px" class="icon"></a>
 			</div>
 
-			<div class="row">
+			<div class="row" onclick="removeMenu()">
 				<div class="col-2"> 
 					<!-- change h1 and p to the desigred ones-->
 					<h1>Give your workout<br>A new style!</h1>
 					<p>Success isn't always about greatness. It's about consistency. Consistent<br> hard work gains success. Greatness will come.</p>
-					<a href="" class="btn">Explore Now &#8594; </a>
+					<a href="products.html" class="btn">Explore Now &#8594; </a>
 				</div>
 				<div class="col-2">
 					<!-- change the "images/mainImage.png" to the desigred image" -->
@@ -59,12 +72,13 @@
 
 
 	<!-- ----------------------- Footer -------------------------->
-	<div class="footer">
+	<div class="footer" onclick="removeMenu()">
 		<div class="container">
 			<div class="row">
 				<div class="footer-col-1">
 					<h3>Ask us</h3>
-					<a href="">Frequently asked questions.</a>
+<!--					class txtglowhover added 12/12-->
+					<a href="" class="txtglowhover">Frequently asked questions.</a>
 				</div>
 				<div class="footer-col-2">
 					<img src="images\logo.svg" alt="logo">
@@ -91,5 +105,20 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		var menu = document.getElementById("navDropdownMenu");
+		function dropMenu() {
+			menu.style.transform = "translateY(10px) translateX(-90px)";
+			menu.style.pointerEvents = "all";
+			menu.style.opacity = 1;
+		}
+
+		function removeMenu()
+		{
+			menu.style.transform = "translateY(-20px) translateX(-90px)";
+			menu.style.pointerEvents = "none";
+			menu.style.opacity = 0;
+		}
+	</script>
 </body>
 </html>
