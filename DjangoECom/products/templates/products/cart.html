@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "products/main.html" %}
+{% load static %}
 
-</body>
-</html>
+{% block body%}
+<div class="cart-page">
+    <div class="small-container cart-page">
+        <table>
+			<tr>
+				<br><br>
+				<th>Product</th>
+				<th>Quantity</th>
+				<th>Subtotal</th>
+			</tr>
+        </table>
+        
+        {% for item in items %}
+        <tr>
+            <td>
+                <div class="cart-info">
+                    <img src="{{product.image.url}}">
+                    <div>
+                        <p>Red Printed Tshirt</p>
+                        <small>Price: 200.00 L.E.</small>
+                        <br>
+                        <a href="" class="txtglowhover">Remove</a>
+                    </div>
+                </div>
+            </td>
+            <td><input type="number" value="1"></td>
+            <td>200.00 L.E.</td>
+        </tr>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock body%}

@@ -1,10 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "products/main.html" %}
+{% load static %}
 
-</body>
-</html>
+{% block body %}
+<div class="all-product">
+    <br>
+    <h2 class="row row-2"> All Products</h2>
+    <div class="row_allproducts">
+		<label for="productsCategory">Category:</label>
+		<select name="productsCategory" id="productsCategory" required class="txtglowhover">
+			<option value="all products">All products</option>
+            {% for Category in menu_category %}
+            <option value="all products">{{ Category.title }}</option>
+            {% endfor %}
+		</select>
+    </div>
+    <div class="small-container">
+        <div class="row">
+            {% for product in products %}
+                <div class="col-4">
+                    <a href="productDetails.html"><img src="{{product.image.url}}"></a>
+                    <h4><strong> {{product.name}} </strong></h4>
+                        <div class="rating" >
+                        
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <a href="" class="btn_allproducts">add to cart</a>
+                    </div>
+                    <p><strong> ${{product.price|floatformat:2}} </strong></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+   
+   {% if products.paginator.num_pages > 1 %}
+        <div class="Page page-btn">
+        <ul class="pagination justify-content-center">
+            {% if products.paginator.num_pages != 1 %}
+                <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+            {% else %} 
+                <li class="page-item disabled"><a class="page-link" href="#">First</a></li>
+            {% endif %}
+            {% if products.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
+            {% endif %}
+            {% for i in products.paginator.page_range %}
+                {% if products.number == i %}
+                    <li class="page-item active"><a class="page-link" href="#">{{ i }} </a></li>
+                {% elif products.number > i|add:"-5" and products.number < i|add:"+5"%}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if products.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+            {% endif %}
+            {% if products.paginator.num_pages != page.number %}
+                <li class="page-item"><a class="page-link" href="?page={{ products.paginator.num_pages }}">Last</a></li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#">Last</a></li>
+            {% endif %}
+        </ul>
+        </div>
+    {% endif %}
+  
+	<br>    
+</div>
+{% endblock body%}

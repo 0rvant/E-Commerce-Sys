@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Add Product</title>
+	<link rel="stylesheet" href="style.css">
+	<!-- Google fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+	<!-- ----------------------- Header -------------------------->
+	<div class="header">
+		<div class="container">
+			<div class="navbar">
+			<div class="logo">
+				<!-- change the "images/logo.png" to the desigred image" -->
+				<a href="index.html"><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+					<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_t8je5sxg.json"  background="transparent"  speed="1"  style="width: 120px; "    autoplay></lottie-player></a>
+			</div>
+			<nav>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="products.html">Products</a></li>
+					<li><a href="">About</a></li>
+					<li><a href="">Contact</a></li>
+					<li><a href="account.html">Account</a></li>
+				</ul>
+			</nav>
+			<a href="cart.html"><img src="images\cartIcon.svg" alt="cart icon" width="30px" height="30px" class="icon"></a>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Account page -->
+	<!-- Account page variables:
+		==>Regesteration form:
+			variableName          :                       Meaning
+			regFirstName          :      Entered user first name in regesteration form
+			regLastName           :      Entered user first name in regesteration form
+			regUserName           :      Entered user user name in regesteration form
+			regEmailAddress       :      Entered Email Address in regesteration form
+			regPassword           :      Entered password in regesteration form
+			regReEnteredPassword  :      Re-entered password in regesteration form
+			regPhoneNumber        :      Entered phone number in regesteration form
+			regSubmitBtn          :      Submitt button in regesteration form
+
+		==>Login form:
+			variableName         :                       Meaning
+			logUserName          :      Entered user name in login form
+			logPassword          :      Entered password in login form
+			loginBtn             :      Submitt button in login form
+	-->
+
+
+
+	<div class="addproduct-page" >
+		<br>
+		<div class="container">
+			<div class="row">
+				<div >
+					<div class="addproductform-container" id="form-height">
+						<div class="form-btn">
+							<span class="txtglowhover">Add Product</span>
+						</div>
+						<form id="AddProductForm" autocomplete="off">
+							<input type="text" placeholder="Product name" name="productName">
+							<input type="text" placeholder="Quantity" name="Quantity">
+							<input type="number" placeholder="Price" id="Price" name="Price">
+							<select name="Currency" id="Currency" required class="txtglowhover" style="position: absolute; transform: translateY(12px) translateX(-100px); width: 15%">
+								<option disabled selected value > Currency </option>
+								<option value="USD" >USD</option>
+								<option value="EGP">EGP</option>
+								<option value="INR">INR</option>
+								<option value="AUD">AUD</option>
+								<option value="EUR">EUR</option>
+								<option value="JPY">JPY</option>
+								<option value="GBP">GBP</option>
+								<option value="CAD">CAD</option>
+							</select>
+							<textarea name="Description " id="descriptionBox" form="AddProductForm" maxlength="3000" placeholder="Add your product description"></textarea>
+							<input type="number" id="discountInput" placeholder="Discount if exist (in percentage)" name="discountPercentage">
+							<div>
+								<label for="Productimg">Select images:</label>
+								<button class="btn" style="position: absolute; transform: translateX(5px) translateY(-0.8px); width: 17%; height: 5%; padding: 0; pointer-events: none; border-radius: 6px">Choose Files</button>
+								<input type="file"  id="Productimg" name="Productimg" multiple required accept="image/*">
+							</div>
+
+							<div>
+							<label for="category">Category:</label>
+							<select name="category" id="category" required class="txtglowhover">
+								<option disabled selected value > -- select product category -- </option>
+								<option value="Shirts" >Shirts</option>
+								<option value="Pants">Pants</option>
+								<option value="Shoes">Shoes</option>
+							</select>
+							</div>
+							<button type="submit" class="btn" name="regSubmitBtn">Add</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br><br>	<br>
+	</div>
+
+
+
+
+	<!-- ----------------------- Footer -------------------------->
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="footer-col-1">
+					<h3>Ask us</h3>
+					<a href="">Frequently asked questions.</a>
+				</div>
+				<div class="footer-col-2">
+					<img src="images\logo.svg" alt="logo">
+
+					<p><h2>منـــــكــــــم و الـيــــــكـــــــم</h2></p>
+				</div>	 
+				<div class="footer-col-3">
+					<h3>Useful Links</h3>
+					<ul>
+						<li>list item 1</li>
+						<li>list item 2</li>
+						<li>list item 3</li>
+						<li>list item 4</li>
+					</ul>
+				</div>	
+				<div class="footer-col-4">
+					<h3>Follow us</h3>
+					<ul>
+						<li>Facebook</li>
+						<li>Twitter</li>
+						<li>Instagram</li>
+						<li>YouTube</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- js for percentage symbol addition-->
+	<script>
+		discount = document.getElementById("discountInput");
+		discount.addEventListener("focus", ()=>{ discount.type = "number";});
+		discount.addEventListener("blur", ()=>{ if (discount.value != "") discount.type = "text"; discount.value += "%"});
+	</script>
+</body>
+</html>

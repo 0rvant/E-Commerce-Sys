@@ -17,12 +17,13 @@
 			<div class="navbar">
 			<div class="logo">
 				<!-- change the "images/logo.png" to the desigred image" -->
-				<a href="index.html"><img src="images/logo.svg" alt="LOGO" width="125px"></a>
+				<a href="index.html"><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+					<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_t8je5sxg.json"  background="transparent"  speed="1"  style="width: 120px; "    autoplay></lottie-player></a>
 			</div>
 			<nav>
 				<ul>
 					<li><a href="index.html">Home</a></li>
-					<li><a href="">Products</a></li>
+					<li><a href="products.html">Products</a></li>
 					<li><a href="">About</a></li>
 					<li><a href="">Contact</a></li>
 					<li><a href="account.html">Account</a></li>
@@ -57,7 +58,7 @@
 
 
 
-	<div class="account-page">
+	<div class="account-page" >
 		<div class="container">
 			<div class="row">
 				<div class="col-2">
@@ -87,11 +88,12 @@
 							<input type="password" placeholder="Re-enter password" name="regReEnteredPassword">
 							<input type="text" placeholder="Phone number" name="regPhoneNumber">
 
-							<label for="cars">Account type:</label>
-							<select name="cars" id="cars" required class="txtglowhover">
+
+							<label for="accountType">Account type:</label>
+							<select name="accountType" id="accountType" required class="txtglowhover">
 								<option disabled selected value> -- select user type -- </option>
-								<option value="volvo">Seller</option>
-								<option value="saab">Buyer</option>
+								<option value="seller">Seller</option>
+								<option value="buyer">Buyer</option>
 							</select>
 							<button type="submit" class="btn" name="regSubmitBtn">Register</button>
 						</form>
@@ -151,7 +153,7 @@
 	<script>
 		var LoginForm = document.getElementById("LoginForm");
 		var RegForm = document.getElementById("RegForm");
-		var Indecator = document.getElementById("Indecator");
+		var Indicator = document.getElementById("Indicator");
 		var formHeight = document.getElementById("form-height");
 
 		function login(){

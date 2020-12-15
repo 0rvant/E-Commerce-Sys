@@ -8,25 +8,28 @@ from .models import Product,User,OrderItem,Order,ShippingAddress
 from users.models import Customer
 from .models import *
 from .decorators import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def index(request):
     return render(request, "users/index.html")
 
 def products(request):  #Products_Store
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer,complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
+    products_list = Product.objects.all()
+    
+    # Paginator for products 
+    page = request.GET.get('page', 1)
+    paginator = Paginator(products_list, 8)
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products_list = paginator.page(paginator.num_pages)
 
-    else:
-        items = []
-        order = {'get_cart_total':0, 'get_cart_items':0}
-        cartItems = order['get_cart_items']
-
-    context = {'products':products , 'order':order ,'cartItems':cartItems}
-    return render(request,'products/products.html',context)
+    #we need to send all Category here to choose one form them in forntend
+    context = {'products':products}
+    return render(request, 'products/products.html', context)
 
 @allowed_users(allowed_roles=['customer'])
 def cart(request):
