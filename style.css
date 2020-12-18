@@ -178,6 +178,7 @@ h1{
 	animation-name: btnHoverout;
 	animation-duration: 0.5s;
 	animation-direction: revert;
+    cursor: pointer;
 }
 
 
@@ -465,6 +466,7 @@ td img{
 	animation-name: btnHoverout;
 	animation-duration: 0.5s;
 	animation-direction: revert;
+    cursor: pointer;
 }
 .btn_allproducts:hover{
 	background: var(--c5);
@@ -496,6 +498,10 @@ td img{
     border: 1px solid aqua;
     color: aqua;
 }
+
+/*------------------User profile page---------*/
+
+
 
 
 /*-- media query for less than 600 screen size */
