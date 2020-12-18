@@ -8,6 +8,28 @@
 	<!-- Google fonts -->
 	<link rel="preconnect" href="https://fonts.gstatic.com"> 
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript"> 
+		var user =  '{{ request.user }}'
+		function getCookie(name){
+			var cookieValue = null ;
+			if (document.cookie && document.cookie !== '')
+			{
+				var cookies = document.cookie.split(';');
+				for(var i = 0 ;i < cookies.length ; i++)
+				{
+					var cookie = cookies[i].trim();	
+					if(cookie.substring(0, name.length + 1) === (name + '=')){
+						cookieValue= decodeURIComponent(cookie.substring(
+							name.length+1));
+							break;
+					}
+				}
+			}
+			return cookieValue
+		}
+		var  csrftoken = getCookie('csrf_token'); 
+	</script>
 </head>
 <body>
 	<!-- ----------------------- Header -------------------------->
@@ -114,5 +136,6 @@
 			menu.style.opacity = 0;
 		}
 	</script>
+	<script type="text/javascript" src="{% static 'products/js/cart.js' %}"> </script>
 </body>
 </html>

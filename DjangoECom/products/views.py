@@ -19,7 +19,7 @@ def products(request):  #Products_Store
     
     # Paginator for products 
     page = request.GET.get('page', 1)
-    paginator = Paginator(products_list, 8)
+    paginator = Paginator(products_list, 8) #number of products in one page = 8
     try:
         products = paginator.page(page)
     except PageNotAnInteger:
@@ -31,7 +31,7 @@ def products(request):  #Products_Store
     context = {'products':products}
     return render(request, 'products/products.html', context)
 
-@allowed_users(allowed_roles=['customer'])
+#@allowed_users(allowed_roles=['customer'])
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer

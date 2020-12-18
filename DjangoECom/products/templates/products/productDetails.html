@@ -27,7 +27,8 @@
 			</div>
 			<div class="col-2">
 				<p>Home / T-Shirt</p>
-				<h1>Red Printed T-Shirt by HRX</h1>
+				<!-- product seller name -->
+				<h1> {{ product.name }} by Seller</h1>
 				<div class="rating">
 					<i class="fa fa-star"></i>
  					<i class="fa fa-star"></i>
@@ -36,6 +37,7 @@
 					<i class="fa fa-star-o"></i>
 				</div>
 				<h4><strong> ${{product.price|floatformat:2}} </strong></h4>
+				<!-- product size  missing -->
 				<select name="selectSizeButton">
 					<option>Select Size</option>
 					<option>XXL</option>
