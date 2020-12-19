@@ -1,0 +1,49 @@
+{% extends "products/main.html" %}
+{% load static %}
+{% block body %}
+<div class="addProduct-page" >
+		<br>
+		<div class="container">
+			<div class="row">
+				<div >
+					<div class="addProductform-container" id="form-height">
+						<div class="form-btn">
+							<span class="txtglowhover">Add Product</span>
+						</div>
+						<form id="AddProductForm" action="{% url 'addProduct' %}" enctype="multipart/form-data" method="post" autocomplete="off">
+							{% csrf_token %}
+							<input type="text" placeholder="Product name" name="productName">
+							<input type="text" placeholder="Quantity" name="Quantity">
+							<input type="number" placeholder="Price" id="Price" name="Price">
+
+							<input type="hidden" name="productId" value="{{productId}}">
+
+							<textarea name="Description" id="descriptionBox" form="AddProductForm" maxlength="3000" placeholder="Add your product description"></textarea>
+							<input type="number" id="discountInput" placeholder="Discount if exist (in percentage)" name="discountPercentage">
+							<div>
+								<label >Select images:</label>
+								<label for="Productimg" class="btn"
+                                            style="position: absolute;
+                                            font-size: 15px;
+                                            transform: translateX(5px) translateY(-0.8px); width: 17%; height: 5%; padding: 0; border-radius: 6px">Choose Files</label>
+								<input type="file"  id="Productimg" name="Productimg" multiple required accept="image/*">
+							</div>
+
+							<div>
+							<label for="category">Category:</label>
+							<select name="category" id="category" required class="txtglowhover">
+								<option disabled selected value > -- select product category -- </option>
+								<option value="C" >Clothes</option>
+								<option value="M">Mobiles</option>
+								<option value="T">TVs</option>
+							</select>
+							</div>
+							<button type="submit" class="btn" name="regSubmitBtn">Add</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br><br>	<br>
+</div>
+{% endblock body%}

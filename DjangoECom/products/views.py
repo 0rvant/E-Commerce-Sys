@@ -9,7 +9,7 @@ from users.models import Customer
 from .models import *
 from .decorators import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.core.files.storage import FileSystemStorage
 # Create your views here.
 def index(request):
     return render(request, "users/index.html")
@@ -133,3 +133,69 @@ def processOrder(request):
         )
 
     return JsonResponse('Payment submitted..', safe=False)
+
+def dashboard(request):  #Products_Store
+    seller=request.user
+    products=seller.product_set.all()
+    context = {'products':products,'seller':seller}
+    return render(request, 'products/sellerDashboard.html', context)
+
+
+
+
+def addProductView(request):  #Products_Store
+    seller=request.user
+    productId = "null"
+    context = {'seller': seller,"productId":productId}
+    return render(request, 'products/addProduct.html', context)
+
+def editProductview(request):  #Products_Store
+    productId=request.GET['productId']
+    seller = request.user
+    context = {'seller': seller,'productId':productId}
+    return render(request, 'products/addProduct.html', context)
+
+def addProduct(request):  #Products_Store
+    productId=request.POST['productId']
+    uploaded_file=request.FILES['Productimg']
+    fs=FileSystemStorage()
+    fs.save(uploaded_file.name,uploaded_file)
+    seller=request.user
+    name = request.POST["productName"]
+    quantity = request.POST["Quantity"]
+    price = request.POST["Price"]
+    discount_price = request.POST["discountPercentage"]
+    image = uploaded_file.name
+    description=request.POST["Description"]
+    category = request.POST["category"]
+    label = "S"
+    if(productId=="null"):
+
+        product = Product.objects.create(
+            name=name,
+            price=price,
+            quantity=quantity,
+            discount_price=discount_price,
+            description=description,
+            image=image,
+            category=category,
+            label=label,
+            seller=seller
+        )
+        product.save()
+    else:
+        Product.objects.filter(id=productId).update(
+            name=name,
+            price=price,
+            quantity=quantity,
+            discount_price=discount_price,
+            description=description,
+            image=image,
+            category=category,
+            label=label,
+            seller=seller
+        )
+
+    products = seller.product_set.all()
+    context = {'products': products, 'seller': seller}
+    return render(request, 'products/sellerDashboard.html', context)

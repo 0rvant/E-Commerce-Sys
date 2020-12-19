@@ -1,2 +1,68 @@
 {% extends "products/main.html" %}
 {% load static %}
+
+{% block body %}
+
+<div class="single-product">
+	<div class="small-container">
+		<div class="row">
+			<div class="col-2">
+				<img src="images/Product1Photo1.jpg" width="100%" id="SellerImg">
+			</div>
+			<div class="sellerdata">
+				<p>Seller</p>
+				<h1>{{seller.first_name}}  {{seller.last_name}}</h1>
+			</div>
+		</div>
+	</div>
+
+<div class="small-container">
+		<div style="position: relative">
+			<h2 style="display: inline">Products</h2>
+			<a href="{% url 'addProductView' %}" class="btn" name="addToCartButton" style="position: absolute; transform: translateY(-30px) translateX(757px);  ">Add Product</a>
+		</div>
+		<br>
+		<div class="all-product">
+            <div class="small-container">
+        <div class="row">
+            {% for product in products %}
+                <div class="col-4">
+
+                    <form id="{{product.id}}" action="{% url 'editProductView' %}" method="get">
+                        <input type="hidden" name="productId" value="{{product.id}}">
+                        <a href="javascript:{}" onclick="document.getElementById('{{product.id}}').submit();" ><img src="{{product.image.url}}"></a>
+                    </form>
+
+                    <h4><strong> {{product.name}} </strong></h4>
+                        <div class="rating" >
+
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+					<form id="ed{{product.id}}" action="{% url 'editProductView' %}" method="get">
+                        <input type="hidden" name="productId" value="{{product.id}}">
+                        <a href="javascript:{}" onclick="document.getElementById('{{product.id}}').submit();" ><h2>Edit</h2></a>
+                    </form>
+
+                    <p><strong> ${{product.price|floatformat:2}} </strong></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+			<div class="page-btn">
+				<span>1</span>
+				<span>2</span>
+				<span>3</span>
+				<span>4</span>
+				<span>&#8594;</span>
+			</div>
+			<br><br>
+		</div>
+ 	</div>
+	<br><br><br><br>
+</div>
+
+{% endblock body%}
