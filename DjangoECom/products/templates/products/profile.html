@@ -1,0 +1,33 @@
+{% extends "products/main.html" %}
+{% load static %}
+{% block body%}
+<div class="single-product">
+        <div class="small-container">
+                <br><br><br>
+            <h1 class="row row-2">User Profile</h1>
+            <div class="row">
+                <div class="col-2">
+                    <br><br>
+                    <img src="{{user.customer.image.url}}" style="padding: inherit" width="70%" id="profile_pic">
+
+                    <form id="udpateProfile" action="{% url 'updateProfile' %}" enctype="multipart/form-data" method="post" autocomplete="off">
+							{% csrf_token %}
+                    <label class="btn" for="profileImg" >Change Picture</label>
+                    <input hidden type="file" id="profileImg" name="profileImg" multiple required accept="image/*">
+                        <button type="submit" class="btn" name="regSubmitBtn">Submit</button>
+                    </form>
+
+                </div>
+
+                <div class="col-2">
+                   <ul style="font-size:20px">
+                        <li><b>Name: </b> {{user.first_name}}  {{user.last_name}}</li>
+                        <li><b>User Name: </b> {{user.username}}</li>
+                       <li><b>Email: </b> {{user.email}} </li>
+                       <li><b>Phone Number: </b> {{user.customer.phone}}</li>
+                    </ul>
+                </div>
+            </div>
+	   </div>
+</div>
+{% endblock body%}

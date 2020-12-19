@@ -157,15 +157,17 @@ def editProductview(request):  #Products_Store
 
 def addProduct(request):  #Products_Store
     productId=request.POST['productId']
+
     uploaded_file=request.FILES['Productimg']
     fs=FileSystemStorage()
     fs.save(uploaded_file.name,uploaded_file)
+    image = uploaded_file.name
+
     seller=request.user
     name = request.POST["productName"]
     quantity = request.POST["Quantity"]
     price = request.POST["Price"]
     discount_price = request.POST["discountPercentage"]
-    image = uploaded_file.name
     description=request.POST["Description"]
     category = request.POST["category"]
     label = "S"
@@ -199,3 +201,25 @@ def addProduct(request):  #Products_Store
     products = seller.product_set.all()
     context = {'products': products, 'seller': seller}
     return render(request, 'products/sellerDashboard.html', context)
+
+def profile(request):
+    user=request.user
+    context = {'user': user}
+    return render(request,'products/profile.html', context)
+
+def updateProfile(request):
+    customer=request.user.customer
+    customerId=customer.id
+
+    uploaded_file = request.FILES['profileImg']
+    fs = FileSystemStorage()
+    fs.save(uploaded_file.name, uploaded_file)
+    image = uploaded_file.name
+
+    Customer.objects.filter(id=customerId).update(
+        image=image,
+    )
+
+    user=request.user
+    context = {'user': user}
+    return render(request,'products/profile.html', context)
