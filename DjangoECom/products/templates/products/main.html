@@ -9,26 +9,54 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com"> 
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script type="text/javascript"> 
-		var user =  '{{ request.user }}'
-		function getCookie(name){
-			var cookieValue = null ;
-			if (document.cookie && document.cookie !== '')
-			{
-				var cookies = document.cookie.split(';');
-				for(var i = 0 ;i < cookies.length ; i++)
-				{
-					var cookie = cookies[i].trim();	
-					if(cookie.substring(0, name.length + 1) === (name + '=')){
-						cookieValue= decodeURIComponent(cookie.substring(
-							name.length+1));
-							break;
-					}
-				}
-			}
-			return cookieValue
+	<script type="text/javascript">
+		var user = '{{request.user}}'
+
+		function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
 		}
-		var  csrftoken = getCookie('csrf_token'); 
+		var csrftoken = getToken('csrftoken')
+
+		function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
+
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
+
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
+
+		    // Return null if not found
+		    return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
+
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		}
+		console.log('Cart:', cart)
+
 	</script>
 </head>
 <body>
@@ -51,7 +79,9 @@
 					<li><a href="">Contact</a></li>
 					<li><a href="{% url 'account' %}">Account</a></li>
 					<!-- Static image trial --> 
-					<li><a href="{% url 'cart' %}"><img src="{% static 'users/images/cartIcon.svg' %}" alt="cart icon" style="position: relative; transform: translateY(6px)" width="30px"class="icon"></a></li>
+					<li><p id="cart-total">{{cartItems}}</p>
+						<a href="{% url 'cart' %}"><img src="{% static 'users/images/cartIcon.svg' %}" alt="cart icon" style="position: relative; transform: translateY(6px)" width="30px"class="icon"></a>
+					</li>
 					<li><img src="images/product1.jpg" alt="profile pic" id="SellerImg" onclick="dropMenu()">
 						<ul id="navDropdownMenu">
 							<li><a href="">Wishlist</a> </li>

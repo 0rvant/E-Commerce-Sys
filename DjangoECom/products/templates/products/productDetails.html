@@ -8,27 +8,18 @@
 		<br><br><br>
 		<div class="row">
 			<div class="col-2">
-				<img src="{{product.image.url}}" width="100%" id="ProductImg">
 
 				<div class="small-img-row">
 					<div class="small-img-col">
-						<img src="{{product.image.url}}" width="100%" class="small-img">
-					</div>
-					<div class="small-img-col">
-						<img src="{{product.image.url}}" width="100%" class="small-img">
-					</div>
-					<div class="small-img-col">
-						<img src="{{product.image.url}}" width="100%" class="small-img">
-					</div>
-					<div class="small-img-col">
-						<img src="{{product.image.url}}" width="100%" class="small-img">
+						<img src="{{product.image.url}}"  class="small-img">
 					</div>
 				</div>
 			</div>
 			<div class="col-2">
-				<p>Home / T-Shirt</p>
+				<p>Home / {{ product.category }}</p>
 				<!-- product seller name -->
-				<h1> {{ product.name }} by Seller</h1>
+				<h1> {{ product.name }}</h1>
+				<h3> By Seller:  {{ product.seller }}</h3>
 				<div class="rating">
 					<i class="fa fa-star"></i>
  					<i class="fa fa-star"></i>
@@ -38,20 +29,12 @@
 				</div>
 				<h4><strong> ${{product.price|floatformat:2}} </strong></h4>
 				<!-- product size  missing -->
-				<select name="selectSizeButton">
-					<option>Select Size</option>
-					<option>XXL</option>
-					<option>XL</option>
-					<option>Large</option>
-					<option>Medium</option>
-					<option>Small</option>
-				</select>
 				<input type="number" name="selectQuantity" value="1">
-				<a class="btn" name="addToCartButton">Add To Cart</a>
-				<a class="btn" name="addToCartButton">Add To Wish List</a>
-				<h3>Product Details</h3>
+				<a  data-product={{product.id}} data-action="add" class="btn_allproducts update-cart" href="">Add to cart</a>
+				<a class="btn" name="addToCartButton" href="">Add To Wish List</a>
+				<h3>{{ product.description }}</h3>
 				<br>
-				<p>Give your summer wardrobe a style upgrade with the HRX Men's Active T-shirt. Team is with a pair of shorts for tour morning workout or a denims for an evening out with the guys.</p>
+				<p></p>
 			</div>  
 		</div>
 	</div>

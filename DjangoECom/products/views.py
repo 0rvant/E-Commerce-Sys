@@ -16,7 +16,12 @@ def index(request):
 
 def products(request):  #Products_Store
     products_list = Product.objects.all()
-    
+    if request.user.is_authenticated:
+        customer=request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        cartItems=0
     # Paginator for products 
     page = request.GET.get('page', 1)
     paginator = Paginator(products_list, 8) #number of products in one page = 8
@@ -28,22 +33,37 @@ def products(request):  #Products_Store
         products_list = paginator.page(paginator.num_pages)
 
     #we need to send all Category here to choose one form them in forntend
-    context = {'products':products}
+    context = {'products':products,'cartItems':cartItems}
     return render(request, 'products/products.html', context)
 
+def productDetails(request):  #Products_Store
+    productId=request.GET['productId']
+    product=Product.objects.get(id=productId)
+    if request.user.is_authenticated:
+        customer=request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        cartItems=0
+    context = {'product':product,'cartItems':cartItems}
+    return render(request, 'products/productDetails.html', context)
+
+    #we need to send all Category here to choose one form them in forntend
+    context = {'products':products,'cartItems':cartItems}
+    return render(request, 'products/products.html', context)
 #@allowed_users(allowed_roles=['customer'])
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order,created = Order.objects.get_or_create(customer=customer,complete=False)
         items =order.orderitem_set.all()
+        cartItems = order.get_cart_items
     else:
         items=[]
         order ={'get_cart_total':0,'get_cart_items':0}
-
-    context ={'items':items , 'order':order}
+        cartItems = 0
+    context ={'items':items , 'order':order, 'cartItems':cartItems}
     return render(request, 'products/cart.html',context)
-
 
 @allowed_users(allowed_roles=['customer'])
 def checkout(request):
@@ -75,7 +95,8 @@ def updateItem(request):
         orderItem.quantity = (orderItem.quantity + 1)
     elif action == 'remove':
         orderItem.quantity = (orderItem.quantity - 1 )
-
+    elif action == 'delete':
+        orderItem.quantity = (orderItem.quantity - orderItem.quantity)
     orderItem.save()
 
     if orderItem.quantity <= 0:

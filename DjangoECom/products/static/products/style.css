@@ -146,7 +146,7 @@ h1{
 	max-width: 1300px;
 	margin: auto;
 	padding-left: 25px;
-	padding-right: 25px; 
+	padding-right: 25px;
 }
 .row{
 	display: flex;
@@ -389,6 +389,7 @@ table{
 	display: flex;
 	flex-wrap: wrap;
 }
+
 th{
 	text-align: left;
 	padding: 5px;
@@ -422,7 +423,7 @@ td img{
 
 .total-price{
 	display: flex;
-	justify-content: flex-end;	
+	justify-content: flex-end;
 }
 
 .total-price table{
@@ -537,6 +538,8 @@ ul#horizontal-list li {
 }
 .single-product .col-2 img{
 	padding: 0;
+	width:400px;
+	height:400px;
 }
 .single-product .col-2 img{
 	padding: 20px;
@@ -571,7 +574,7 @@ input:focus{
 	justify-content: space-between;
 }
 .small-img-col{
-	flex-basis: 24%;
+	flex-basis: 100%;
 	cursor: pointer;
 }
 /* ---------Recommended products--------- */
@@ -673,4 +676,35 @@ input:focus{
 
 .addproductform-container button{
 	width: 35%;
+}
+
+
+/* <============================= Customizations ===============================>*/
+#cart-total{
+	display: block;
+	text-align: center;
+	color:black;
+	background-color: white;
+	width: 15px;
+	height: 20px;
+	border-radius: 30%;
+	font-size: 14px;
+}
+.quantity{
+	display: inline-block;
+	font-weight: 700;
+	padding-right:10px;
+}
+
+.chg-quantity{
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	transition:.1s;
+}
+
+.chg-quantity:hover{
+	opacity: .6;
 }

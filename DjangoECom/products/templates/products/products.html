@@ -18,7 +18,12 @@
         <div class="row">
             {% for product in products %}
                 <div class="col-4">
-                    <a href="productDetails.html"><img src="{{product.image.url}}"></a>
+
+                    <form id="{{product.id}}" action="{% url 'product_details' %}" method="get">
+                        <input type="hidden" name="productId" value="{{product.id}}">
+                        <a href="javascript:{}" onclick="document.getElementById('{{product.id}}').submit();" ><img src="{{product.image.url}}"></a>
+                    </form>
+
                     <h4><strong> {{product.name}} </strong></h4>
                         <div class="rating" >
                         
@@ -27,7 +32,7 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
-                        <a  data-product={{product.id}} data-action="add" class="btn_allproducts update-cart">add to cart</a>
+                        <a  data-product={{product.id}} data-action="add" class="btn_allproducts update-cart" href="">add to cart</a>
                     </div>
                     <p><strong> ${{product.price|floatformat:2}} </strong></p>
                 </div>
