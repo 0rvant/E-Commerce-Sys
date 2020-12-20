@@ -20,6 +20,8 @@ urlpatterns = [
 
     path('updateProfile',views.updateProfile, name="updateProfile"),
 
-    path('logout',usersview.logout, name="logout")
+    path('logout',usersview.logout, name="logout"),
 
+    path('update_wishlist', views.UpdateWishList, name="update_wishlist"),
+    path('wishlist', views.ViewWishList, name="wishlist"),
 ]

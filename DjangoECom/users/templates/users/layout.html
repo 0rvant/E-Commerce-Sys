@@ -32,7 +32,7 @@
 					<li><a href="{% url 'cart' %}"><img src="{% static 'users/images/cartIcon.svg' %}" alt="cart icon" style="position: relative; transform: translateY(6px)" width="30px"class="icon"></a></li>
 					<li><img src="images/product1.jpg" alt="profile pic" id="SellerImg" onclick="dropMenu()">
 						<ul id="navDropdownMenu">
-							<li><a href="">Wishlist</a> </li>
+							<li><a href="{% url 'wishlist' %}">Wishlist</a></li>
 							<li>Help</li>
 							<li><a href="{% url 'profile' %}">Profile</a></li>
 							<hr>

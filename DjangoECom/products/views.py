@@ -3,13 +3,12 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 import json
 import datetime
-from django.views.generic import ListView,DetailView
 from .models import Product,User,OrderItem,Order,ShippingAddress
 from users.models import Customer
-from .models import *
 from .decorators import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.storage import FileSystemStorage
+from products.models import *
 # Create your views here.
 def index(request):
     return render(request, "users/index.html")
@@ -102,7 +101,7 @@ def updateItem(request):
     if orderItem.quantity <= 0:
         orderItem.delete()
 
-    return JsonResponse('Item was added', safe=False)
+    return JsonResponse('Done', safe=False)
 
 
 def processOrder(request):
@@ -223,3 +222,28 @@ def updateProfile(request):
     user=request.user
     context = {'user': user}
     return render(request,'products/profile.html', context)
+
+
+def UpdateWishList(request):
+    data = json.loads(request.body)
+    productId = data['productId']
+    action = data['action']
+
+    customer = request.user.customer
+    product = Product.objects.get(id=productId)
+    wishList, created =WishList.objects.get_or_create(customer=customer)
+
+    wishListItem, created = WishListItem.objects.get_or_create(wishList=wishList,product=product)
+
+    if action == 'add':
+        wishListItem.save()
+    elif action == 'delete':
+        wishListItem.delete()
+    return JsonResponse('Done', safe=False)
+
+def ViewWishList(request):
+    customer = request.user.customer
+    wishList,created = WishList.objects.get_or_create(customer=customer)
+    items =wishList.wishlistitem_set.all()
+    context ={'items':items , 'wishList':wishList}
+    return render(request, 'products/wishlist.html',context)

@@ -29,9 +29,8 @@
 				</div>
 				<h4><strong> ${{product.price|floatformat:2}} </strong></h4>
 				<!-- product size  missing -->
-				<input type="number" name="selectQuantity" value="1">
-				<a  data-product={{product.id}} data-action="add" class="btn_allproducts update-cart" href="">Add to cart</a>
-				<a class="btn" name="addToCartButton" href="">Add To Wish List</a>
+				<a  data-product={{product.id}} data-action="add" class="btn update-cart" href="">Add to cart</a>
+				<a  data-product={{product.id}} data-action="add" class="btn update-wishlist" href="">Add To Wish List</a>
 				<h3>{{ product.description }}</h3>
 				<br>
 				<p></p>

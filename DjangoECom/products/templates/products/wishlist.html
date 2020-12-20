@@ -1,0 +1,32 @@
+{% extends "products/main.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="wishlist-page">
+	<div class="small-container wishlist-page">
+		<table>
+			<tr>
+				<th>Wishlist</th>
+			</tr>
+			<tr>
+                {% for item in items %}
+				<td>
+					<div class="cart-info">
+						<img src="{{item.product.imageURL}}">
+						<div>
+							<p>{{ item.product.name }}</p>
+							<small>${{item.product.price|floatformat:2}}</small>
+							<br>
+                            <img data-product="{{item.product.id}}" data-action="delete" class="chg-quantity update-wishlist" src="{% static  'products/images/remove.png' %}">
+						</div>
+					</div>
+				</td>
+                {% endfor %}
+			</tr>
+		</table>
+		<br>
+	</div>
+	<br><br>
+</div>
+{% endblock body%}

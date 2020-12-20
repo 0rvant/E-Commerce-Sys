@@ -110,3 +110,13 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+
+
+class WishList(models.Model):
+    customer = models.ForeignKey(Customer,on_delete=models.SET_NULL, blank=True,null=True)
+    def __str__(self):
+        return str(self.id)
+
+class WishListItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
+    wishList = models.ForeignKey(WishList, on_delete=models.SET_NULL, blank=True, null=True)
