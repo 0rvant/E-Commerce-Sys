@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Product details</title>
+	<link rel="stylesheet" href="style.css">
+	<!-- Google fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+	<!-- ----------------------- Header -------------------------->
+	<div class="header">
+		<div class="container">
+			<div class="navbar">
+			<div class="logo">
+				<!-- change the "images/logo.png" to the desigred image" -->
+				<a href="index.html"><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+					<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_t8je5sxg.json"  background="transparent"  speed="1"  style="width: 120px; "    autoplay></lottie-player></a>
+			</div>
+			<nav>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="products.html">Products</a></li>
+					<li><a href="">About</a></li>
+					<li><a href="">Contact</a></li>
+					<li><a href="account.html">Account</a></li>
+				</ul>
+			</nav>
+			<a href="cart.html"><img src="images\cartIcon.svg" alt="cart icon" width="30px" height="30px" class="icon"></a>
+			</div>
+		</div>
+	</div>
+
+
+<!----- User Proile ------>
+    <div class="single-product">
+        <div class="small-container">
+            <br><br><br>
+        <h1 class="row row-2">User Profile</h1>
+		<div class="row">
+			<div class="col-2">
+                <br><br>
+				<img src="images/Product1Photo1.jpg" style="padding: inherit" width="70%" id="profile_pic">
+                <label class="btn" for="new_profile_pic" >Change Picture</label>
+                <input hidden type="file" id="new_profile_pic" name="new_profile_pic" multiple required accept="image/*">
+            </div>
+            <div class="col-2">
+               <ul style="font-size:20px">
+                    <li><b>Name: </b> Mark Essam</li>
+                    <li><b>User Name: </b> mark</li>
+                   <li><b>Email: </b> mark_essam@gmail.com</li>
+                    <li><b>Phone Number: </b> 01244675386</li>
+                </ul> 
+            </div>
+        </div>
+	   </div>
+    </div>
+
+
+
+
+	<!-- ----------------------- Footer -------------------------->
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="footer-col-1">
+					<h3>Ask us</h3>
+					<a href="">Frequently asked questions.</a>
+				</div>
+				<div class="footer-col-2">
+					<img src="images\logo.svg" alt="logo">
+
+					<p><h2>منـــــكــــــم و الـيــــــكـــــــم</h2></p>
+				</div>	 
+				<div class="footer-col-3">
+					<h3>Useful Links</h3>
+					<ul>
+						<li>list item 1</li>
+						<li>list item 2</li>
+						<li>list item 3</li>
+						<li>list item 4</li>
+					</ul>
+				</div>	
+				<div class="footer-col-4">
+					<h3>Follow us</h3>
+					<ul>
+						<li>Facebook</li>
+						<li>Twitter</li>
+						<li>Instagram</li>
+						<li>YouTube</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<!-- -------------- js for product gallery ---------------- -->
+<script>
+	var ProductImg = document.getElementById("ProductImg");
+	var SmallImg = document.getElementsByClassName("small-img");
+
+	SmallImg[0].onclick = function()
+	{
+		ProductImg.src = SmallImg[0].src;
+	}
+	SmallImg[1].onclick = function()
+	{
+		ProductImg.src = SmallImg[1].src;
+	}
+	SmallImg[2].onclick = function()
+	{
+		ProductImg.src = SmallImg[2].src;
+	}
+	SmallImg[3].onclick = function()
+	{
+		ProductImg.src = SmallImg[3].src;
+	}
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -84,8 +84,11 @@
 							<textarea name="Description " id="descriptionBox" form="AddProductForm" maxlength="3000" placeholder="Add your product description"></textarea>
 							<input type="number" id="discountInput" placeholder="Discount if exist (in percentage)" name="discountPercentage">
 							<div>
-								<label for="Productimg">Select images:</label>
-								<button class="btn" style="position: absolute; transform: translateX(5px) translateY(-0.8px); width: 17%; height: 5%; padding: 0; pointer-events: none; border-radius: 6px">Choose Files</button>
+								<label >Select images:</label>
+								<label for="Productimg" class="btn"
+                                            style="position: absolute;
+                                            font-size: 15px;
+                                            transform: translateX(5px) translateY(-0.8px); width: 17%; height: 5%; padding: 0; border-radius: 6px">Choose Files</label>
 								<input type="file"  id="Productimg" name="Productimg" multiple required accept="image/*">
 							</div>
 
