@@ -16,33 +16,14 @@
 			<div class="navbar">
 			<div class="logo">
 <!--				animated logo is added 12/12-->
-				<a href="{% url 'index' %}"><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-					<script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
-					<lottie-player id="logoanimation" src="https://assets10.lottiefiles.com/packages/lf20_t8je5sxg.json"  background="transparent"  speed="1"  style="width: 120px; "    autoplay></lottie-player></a>
+				<a href="{% url 'index' %}"><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script><lottie-player id="logoanimation" src="https://assets10.lottiefiles.com/packages/lf20_t8je5sxg.json"  background="transparent"  speed="1"  style="width: 120px; "    autoplay></lottie-player></a>
 			</div>
 			<nav>
 				<ul>
-					<li><a href="{% url 'index' %}">Home</a></li>
-					<li><a href="{% url 'products' %}">Products</a></li>
-					<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-					<li><a href="">About</a></li>
-					<li><a href="">Contact</a></li>
-					<li><a href="{% url 'account' %}">Account</a></li>
-					<!-- Static image trial -->
-					<li><a href="{% url 'cart' %}"><img src="{% static 'users/images/cartIcon.svg' %}" alt="cart icon" style="position: relative; transform: translateY(6px)" width="30px"class="icon"></a></li>
-					<li><img src="images/product1.jpg" alt="profile pic" id="SellerImg" onclick="dropMenu()">
-						<ul id="navDropdownMenu">
-							<li><a href="{% url 'wishlist' %}">Wishlist</a></li>
-							<li>Help</li>
-							<li><a href="{% url 'profile' %}">Profile</a></li>
-							<hr>
-							<li><a href="{% url 'logout' %}">Logout</a></li>
-						</ul>
-					</li>
-				</ul>
+					{% block NavBar %}
+					{% endblock NavBar %}
 			</nav>
 			</div>
-
 			{% block body %}
 		
 			{% endblock %}

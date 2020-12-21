@@ -20,11 +20,15 @@
 			logPassword          :      Entered password in login form
 			loginBtn             :      Submitt button in login form
 	-->
-
+{% block NavBar %}
+	<li><a href="{% url 'index' %}">Home</a></li>
+	<li><a href="{% url 'products' %}">Products</a></li>
+	<li><a href="">About</a></li>
+	<li><a href="">Contact</a></li>
+	<li><a href="{% url 'account' %}">Account</a></li>
+{% endblock NavBar %}
 
 {% block body %}
-
-
 			<div class="row">
 				<div class="col-2">
 					<img src="../static/users/images/accountimage.svg" width="100%" alt="mainImage">

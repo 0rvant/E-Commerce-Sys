@@ -1,8 +1,37 @@
 {% extends "products/main.html" %}
 {% load static %}
 
+{% block NavBar %}
+	{% if request.user.is_authenticated %}
+		<li><a href="{% url 'index' %}">Home</a></li>
+		<li><a href="{% url 'products' %}">Products</a></li>
+		{% if request.user.customer.isseller == True %}
+			<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		{% endif %}
+		<li><a href="">About</a></li>
+		<li><a href="">Contact</a></li>
+		<li><p id="cart-total">{{cartItems}}</p>
+			<a href="{% url 'cart' %}"><img src="{% static 'users/images/cartIcon.svg' %}" alt="cart icon" style="position: relative; transform: translateY(6px)" width="30px"class="icon"></a>
+		<li><img src="{{request.user.customer.image.url}}" alt="profile pic" id="SellerImg" onclick="dropMenu()">
+			<ul id="navDropdownMenu">
+				<li><a href="{% url 'wishlist' %}">Wishlist</a></li>
+				<li>Help</li>
+				<li><a href="{% url 'profile' %}">Profile</a></li>
+				<hr>
+				<li><a href="{% url 'logout' %}">Logout</a></li>
+			</ul>
+		</li>
+	{% else %}
+		<li><a href="{% url 'index' %}">Home</a></li>
+		<li><a href="{% url 'products' %}">Products</a></li>
+		<li><a href="">About</a></li>
+		<li><a href="">Contact</a></li>
+		<li><a href="{% url 'account' %}">Account</a></li>
+	{% endif %}
+{% endblock NavBar %}
+
 {% block body%}
-<<!-- Single product deatils -->
+<!-- Single product deatils -->
 <div class="single-product">
 	<div class="small-container">
 		<br><br><br>
@@ -29,8 +58,8 @@
 				</div>
 				<h4><strong> ${{product.price|floatformat:2}} </strong></h4>
 				<!-- product size  missing -->
-				<a  data-product={{product.id}} data-action="add" class="btn update-cart" href="">Add to cart</a>
-				<a  data-product={{product.id}} data-action="add" class="btn update-wishlist" href="">Add To Wish List</a>
+				<a  data-product={{product.id}} data-action="add" class="btn update-cart" href="">Add to Cart</a>
+				<a  data-product={{product.id}} data-action="add" class="btn update-wishlist" href="">Add to Wishlist</a>
 				<h3>{{ product.description }}</h3>
 				<br>
 				<p></p>
@@ -62,7 +91,7 @@
  					<i class="fa fa-star"></i>
  					<i class="fa fa-star"></i>
 					<i class="fa fa-star-o"></i>
-					<a href="" class="btn_allproducts">add to cart</a>
+					<a href="" class="btn_allproducts">Add to Cart</a>
  				</div>
  				<p>150.00 L.E.</p>
  			</div>

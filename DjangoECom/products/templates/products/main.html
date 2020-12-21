@@ -72,25 +72,8 @@
 			</div>
 			<nav>
 				<ul>
-					<li><a href="{% url 'index' %}">Home</a></li>
-					<li><a href="{% url 'products' %}">Products</a></li>
-					<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-					<li><a href="">About</a></li>
-					<li><a href="">Contact</a></li>
-					<li><a href="{% url 'account' %}">Account</a></li>
-					<!-- Static image trial --> 
-					<li><p id="cart-total">{{cartItems}}</p>
-						<a href="{% url 'cart' %}"><img src="{% static 'users/images/cartIcon.svg' %}" alt="cart icon" style="position: relative; transform: translateY(6px)" width="30px"class="icon"></a>
-					</li>
-					<li><img src="images/product1.jpg" alt="profile pic" id="SellerImg" onclick="dropMenu()">
-						<ul id="navDropdownMenu">
-							<li><a href="{% url 'wishlist' %}">Wishlist</a></li>
-							<li>Help</li>
-							<li><a href="{% url 'profile' %}">Profile</a></li>
-							<hr>
-							<li><a href="{% url 'logout' %}">Logout</a></li>
-						</ul>
-					</li>
+					{% block NavBar %}
+					{% endblock NavBar %}
 				</ul>
 			</nav>
 			</div>

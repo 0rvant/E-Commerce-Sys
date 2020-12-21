@@ -614,7 +614,9 @@ input:focus{
 
 .col-2 #SellerImg {
 	width: 70%;
+	height: 70%;
 	border-radius: 100%;
+	object-fit: cover;
 }
 
 .sellerdata{
