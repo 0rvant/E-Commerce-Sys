@@ -35,7 +35,7 @@ def products(request):  #Products_Store
     currency_code = request.session['currency']
     currency = Currency.objects.get(code=currency_code)
     #we need to send all Category here to choose one form them in forntend
-    context = {'products':products,'cartItems':cartItems, 'currency':currency}
+    context = {'products':products, 'cartItems':cartItems, 'currency':currency}
     return render(request, 'products/products.html', context)
 
 def productDetails(request):  #Products_Store
@@ -49,11 +49,9 @@ def productDetails(request):  #Products_Store
         cartItems=0
     currency_code = request.session['currency']
     currency = Currency.objects.get(code=currency_code)
-    context = {'product':product,'cartItems':cartItems}
-    return render(request, 'products/productDetails.html', context)
     #we need to send all Category here to choose one form them in forntend
-    context = {'products':products,'cartItems':cartItems, 'currency':currency}
-    return render(request, 'products/products.html', context)
+    context = {'product':product, 'cartItems':cartItems, 'currency':currency}
+    return render(request, 'products/productDetails.html', context)
 
 #@allowed_users(allowed_roles=['customer'])
 def cart(request):
@@ -143,7 +141,9 @@ def processOrder(request):
 def dashboard(request):  #Products_Store
     seller=request.user
     products=seller.product_set.all()
-    context = {'products':products,'seller':seller}
+    currency_code = request.session['currency']
+    currency = Currency.objects.get(code=currency_code)
+    context = {'products':products,'seller':seller, 'currency':currency}
     return render(request, 'products/sellerDashboard.html', context)
 
 
@@ -205,7 +205,9 @@ def addProduct(request):  #Products_Store
         )
 
     products = seller.product_set.all()
-    context = {'products': products, 'seller': seller}
+    currency_code = request.session['currency']
+    currency = Currency.objects.get(code=currency_code)
+    context = {'products':products,'seller':seller, 'currency':currency}
     return render(request, 'products/sellerDashboard.html', context)
 
 def profile(request):
@@ -251,6 +253,12 @@ def UpdateWishList(request):
 def ViewWishList(request):
     customer = request.user.customer
     wishList,created = WishList.objects.get_or_create(customer=customer)
+    if request.user.is_authenticated:
+        customer=request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        cartItems=0
     items =wishList.wishlistitem_set.all()
-    context ={'items':items , 'wishList':wishList}
+    context ={'items':items , 'wishList':wishList, 'cartItems':cartItems}
     return render(request, 'products/wishlist.html',context)
