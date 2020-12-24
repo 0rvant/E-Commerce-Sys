@@ -17,12 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from users import views 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', include("users.urls")),
+    path('', include("users.urls")),
+    #path('users/', include("users.urls")),
     path('products/', include("products.urls")),
-    path('', include("products.urls")),
+    #path('', include("products.urls")),
+    path('currencies/', include('currencies.urls')),
+    path('selectcurrency', views.selectcurrency, name='selectcurrency'),
+    path('savecurrency', views.savecurrency, name='savecurrency'),
 ]
 
 

@@ -9,6 +9,7 @@ from .decorators import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.storage import FileSystemStorage
 from products.models import *
+from currencies.models import Currency
 # Create your views here.
 def index(request):
     return render(request, "users/index.html")
@@ -31,8 +32,10 @@ def products(request):  #Products_Store
     except EmptyPage:
         products_list = paginator.page(paginator.num_pages)
 
+    currency_code = request.session['currency']
+    currency = Currency.objects.get(code=currency_code)
     #we need to send all Category here to choose one form them in forntend
-    context = {'products':products,'cartItems':cartItems}
+    context = {'products':products,'cartItems':cartItems, 'currency':currency}
     return render(request, 'products/products.html', context)
 
 def productDetails(request):  #Products_Store
@@ -44,12 +47,14 @@ def productDetails(request):  #Products_Store
         cartItems = order.get_cart_items
     else:
         cartItems=0
+    currency_code = request.session['currency']
+    currency = Currency.objects.get(code=currency_code)
     context = {'product':product,'cartItems':cartItems}
     return render(request, 'products/productDetails.html', context)
-
     #we need to send all Category here to choose one form them in forntend
-    context = {'products':products,'cartItems':cartItems}
+    context = {'products':products,'cartItems':cartItems, 'currency':currency}
     return render(request, 'products/products.html', context)
+
 #@allowed_users(allowed_roles=['customer'])
 def cart(request):
     if request.user.is_authenticated:
@@ -61,7 +66,9 @@ def cart(request):
         items=[]
         order ={'get_cart_total':0,'get_cart_items':0}
         cartItems = 0
-    context ={'items':items , 'order':order, 'cartItems':cartItems}
+    currency_code = request.session['currency']
+    currency = Currency.objects.get(code=currency_code)
+    context ={'items':items , 'order':order, 'cartItems':cartItems, 'currency':currency}
     return render(request, 'products/cart.html',context)
 
 @allowed_users(allowed_roles=['customer'])

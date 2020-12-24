@@ -42,10 +42,11 @@
 
                     <form id="udpateProfile" action="{% url 'updateProfile' %}" enctype="multipart/form-data" method="post" autocomplete="off">
 							{% csrf_token %}
-                    <label class="btn" for="profileImg" >Change Picture</label>
-                    <input hidden type="file" id="profileImg" name="profileImg" multiple required accept="image/*">
-                        <button type="submit" class="btn" name="regSubmitBtn">Submit</button>
+                    <label class="btn" for="profileImg" style="width:160px; height:34px; font-size:12px">Change Picture</label>
+                    <input hidden type="file" id="profileImg" name="profileImg" required accept="image/*">
+                        <button type="submit" class="btn" style="position: absolute; width:160px;transform: translateX(10px) ;height:34px; font-size:12px"name="regSubmitBtn">Submit</button>
                     </form>
+					<br>
 
                 </div>
 
@@ -59,5 +60,7 @@
                 </div>
             </div>
 	   </div>
+	   <br>
 </div>
+<br><br>
 {% endblock body%}

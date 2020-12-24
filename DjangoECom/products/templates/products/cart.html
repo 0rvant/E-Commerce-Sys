@@ -1,5 +1,6 @@
 {% extends "products/main.html" %}
 {% load static %}
+{% load currency %}
 
 {% block NavBar %}
 	{% if request.user.is_authenticated %}
@@ -47,7 +48,7 @@
                     <img src="{{item.product.imageURL}}">
                     <div>
                         <p>{{ item.product.name }}</p>
-                        <small>${{item.product.price|floatformat:2}} </small>
+                        <small> {{item.product.price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </small>
                         <br>
 
 						<img data-product="{{item.product.id}}" data-action="delete" class="chg-quantity update-cart" src="{% static  'products/images/remove.png' %}">
@@ -64,7 +65,7 @@
 			</div>
 
 			</td>
-            <td>${{item.get_total}}</td>
+            <td>{{item.get_total|currency:currency.code}} {{ currency.symbol }}</td>
         	</tr>
 			{% endfor %}
 		</table>
@@ -73,15 +74,15 @@
 			<table>
 				<tr>
 					<td>Subtotal</td>
-					<td>${{order.get_cart_total}}</td>
+					<td>{{ order.get_cart_total|currency:currency.code }} {{ currency.symbol }}</td>
 				</tr>
 				<tr>
 					<td>Discount</td>
-					<td>${{order.cart_discount}}</td>
+					<td>{{ order.cart_discount|currency:currency.code }} {{ currency.symbol }}</td>
 				</tr>
 				<tr>
 					<td>Total</td>
-					<td>${{order.get_cart_total_discount}}</td>
+					<td>{{ order.get_cart_total_discount|currency:currency.code }} {{ currency.symbol }}</td>
 				</tr>
 
 			</table>
@@ -92,6 +93,6 @@
 		</div>
     </div>
 </div>
-
+<br><br>
 
 {% endblock body%}

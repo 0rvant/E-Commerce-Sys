@@ -1,5 +1,6 @@
 {% extends "products/main.html" %}
 {% load static %}
+{% load currency %}
 
 {% block NavBar %}
 	{% if request.user.is_authenticated %}
@@ -56,10 +57,11 @@
 					<i class="fa fa-star-half-o"></i>
 					<i class="fa fa-star-o"></i>
 				</div>
-				<h4><strong> ${{product.price|floatformat:2}} </strong></h4>
+				<h5>In stock: {{product.quantity}}</h5>
+				<h4><strong> {{product.price|currency:currency.code |floatformat:2}}{{ currency.symbol }} </strong></h4>
 				<!-- product size  missing -->
-				<a  data-product={{product.id}} data-action="add" class="btn update-cart" href="">Add to Cart</a>
-				<a  data-product={{product.id}} data-action="add" class="btn update-wishlist" href="">Add to Wishlist</a>
+				<a data-product={{product.id}} data-action="add" class="btn update-cart">Add to Cart</a>
+				<a data-product={{product.id}} data-action="add" class="btn update-wishlist">Add to Wishlist</a>
 				<h3>{{ product.description }}</h3>
 				<br>
 				<p></p>

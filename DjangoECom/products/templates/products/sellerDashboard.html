@@ -1,5 +1,6 @@
 {% extends "products/main.html" %}
 {% load static %}
+{% load currency %}
 
 {% block NavBar %}
 	{% if request.user.is_authenticated %}
@@ -73,10 +74,10 @@
                     </div>
 					<form id="ed{{product.id}}" action="{% url 'editProductView' %}" method="get">
                         <input type="hidden" name="productId" value="{{product.id}}">
-                        <a href="javascript:{}" onclick="document.getElementById('{{product.id}}').submit();" ><h2>Edit</h2></a>
+                        <a href="javascript:{}" onclick="document.getElementById('{{product.id}}').submit();"><h2  class="txtglowhover">Edit</h2></a>
                     </form>
 
-                    <p><strong> ${{product.price|floatformat:2}} </strong></p>
+                    <p><strong> {{product.price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
                 </div>
             {% endfor %}
         </div>
@@ -93,5 +94,5 @@
  	</div>
 	<br><br><br><br>
 </div>
-
+<br><br>
 {% endblock body%}

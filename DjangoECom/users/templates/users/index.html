@@ -1,6 +1,6 @@
 {% extends "users/layout.html" %}
 {% load static %}
-
+{% load currency %}
 {% block NavBar %}
 	{% if request.user.is_authenticated %}
 		<li><a href="{% url 'index' %}">Home</a></li>
@@ -43,4 +43,5 @@
 			<img src="../static/users/images/mainImage.svg" alt="Main page image">
 		</div>
 </div>
+<br><br><br><br><br>
 {% endblock %}

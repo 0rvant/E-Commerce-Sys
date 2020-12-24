@@ -1,15 +1,43 @@
-from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from django.http import HttpRequest
 from django.urls import reverse
-from django.shortcuts import redirect
+from DjangoECom import settings
 from django.contrib.auth.models import User, auth, Group
 from .models import Customer
-from products.decorators import unauthenticated_user
+from products.decorators import unauthenticated_user, allowed_users
 from django.contrib.auth import logout as django_logout
+from products.models import *
+from currencies.models import Currency
+import requests
 # Create your views here.
 def index(request):
-    return render(request, "users/index.html")
+    #Multi-currency code.
+    if not request.session.has_key('currency'):
+        request.session['currency'] = settings.DEFAULT_CURRENCY
+    else:
+        if request.user.is_authenticated:
+            # Where USD is the base currency you want to use
+            url = 'https://api.exchangerate-api.com/v4/latest/USD'
+
+            # Making our request
+            response = requests.get(url)
+            data = response.json()
+            #setting the updated factor.
+            currency_code = request.user.customer.currency_id
+            currency = Currency.objects.get(code=currency_code)
+            currency.factor = data['rates'][currency_code]
+            currency.save()
+
+    if request.user.is_authenticated:
+        customer=request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else: 
+        cartItems = 0
+    context={'cartItems':cartItems}
+    return render(request, "users/index.html",context)
 
 @unauthenticated_user
 def account_view(request):
@@ -99,3 +127,27 @@ def account_view(request):
 def logout(request):
     django_logout(request)
     return render(request, "users/account.html")
+
+def selectcurrency(request):
+    if request.method == 'POST':
+        # Where USD is the base currency you want to use
+        url = 'https://api.exchangerate-api.com/v4/latest/USD'
+
+        # Making our request
+        response = requests.get(url)
+        data = response.json()
+
+        currency_code = request.POST['currency']
+        currency = Currency.objects.get(code=currency_code)
+        currency.factor = data['rates'][currency_code]
+        currency.save()
+        request.session['currency'] = currency_code
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+@allowed_users(allowed_roles=['customer', 'seller', 'admin'])    
+def savecurrency(request):
+    #Save currency to user database.
+    user_data = Customer.objects.get(user_id=request.user.id)
+    user_data.currency_id = request.session['currency']
+    user_data.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

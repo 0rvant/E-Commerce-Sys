@@ -14,16 +14,14 @@
 	<div class="header">
 		<div class="container">
 			<div class="navbar">
-			<div class="logo">
-<!--				animated logo is added 12/12-->
-				<a href="{% url 'index' %}"><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script><lottie-player id="logoanimation" src="https://assets10.lottiefiles.com/packages/lf20_t8je5sxg.json"  background="transparent"  speed="1"  style="width: 120px; "    autoplay></lottie-player></a>
-			</div>
+			<div class="logo" id="logoanimation" style="width: 130px; height: 130px; transform: translateY(10px)"></div>
 			<nav>
 				<ul>
 					{% block NavBar %}
 					{% endblock NavBar %}
 			</nav>
 			</div>
+			<div onclick="removeMenu()">
 			{% block body %}
 		
 			{% endblock %}
@@ -32,38 +30,22 @@
 
 	<script>
 		{% block script %}
-
 		{% endblock %}
 	</script>
-
-
-
-
-
-
-
+	
 	<!-- ----------------------- Footer -------------------------->
 	<div class="footer" onclick="removeMenu()">
 		<div class="container">
 			<div class="row">
 				<div class="footer-col-1">
 					<h3>Ask us</h3>
-<!--					class txtglowhover added 12/12-->
+					<!--class txtglowhover added 12/12-->
 					<a href="" class="txtglowhover">Frequently asked questions.</a>
 				</div>
 				<div class="footer-col-2">
 					<img src="../../static/users/images/logo.svg" alt="logo">
 					<p><h2>منـــــكــــــم و الـيــــــكـــــــم</h2></p>
-				</div>	 
-				<div class="footer-col-3">
-					<h3>Useful Links</h3>
-					<ul>
-						<li>list item 1</li>
-						<li>list item 2</li>
-						<li>list item 3</li>
-						<li>list item 4</li>
-					</ul>
-				</div>	
+				</div>	 	
 				<div class="footer-col-4">
 					<h3>Follow us</h3>
 					<ul>
@@ -73,23 +55,31 @@
 						<li>YouTube</li>
 					</ul>
 				</div>
+				<div class="footer-col-3">
+					<h3>Currency</h3>
+					<form action="{% url 'selectcurrency' %}" method="post">
+						{% csrf_token %}
+						<select name="currency" id="Currency" onchange="submit()" class="txtglowhover" style="width: 25%">
+							{% for currency in CURRENCIES %}
+								<option value="{{ currency.code }}"
+									{% ifequal currency.code request.session.currency %}selected="selected"{% endifequal %}>
+								{{ currency.symbol }} {{ currency.code }}
+								</option>
+							{% endfor %}
+						</select>
+						<noscript>
+							<input type="submit" value="Set"/>
+						</noscript>
+					</form>
+					<form action="{% url 'savecurrency' %}" method="post">
+						{% csrf_token %}
+						<input class='btn' type="submit" value="Save Currency" style="width: 60%; text-align: center;"/>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-		var menu = document.getElementById("navDropdownMenu");
-		function dropMenu() {
-			menu.style.transform = "translateY(10px) translateX(-90px)";
-			menu.style.pointerEvents = "all";
-			menu.style.opacity = 1;
-		}
-
-		function removeMenu()
-		{
-			menu.style.transform = "translateY(-20px) translateX(-90px)";
-			menu.style.pointerEvents = "none";
-			menu.style.opacity = 0;
-		}
-	</script>
+	<script type="text/javascript" src="{% static 'products/js/lottie.js' %}"></script>
+	<script type="text/javascript" src="{% static 'products/js/logo.js' %}"></script>
 </body>
 </html>

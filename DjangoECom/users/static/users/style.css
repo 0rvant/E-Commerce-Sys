@@ -7,6 +7,7 @@
 	--white: #FFF;
 	--black: #000;
 	--error: #F00;
+
 }
 
 /* width */
@@ -44,11 +45,12 @@ body{
 
 /*padding was 20 before the animated logo*/
 .navbar{
-	display: flex;
-	align-items: center;
-	padding: 0px;
+	/*logo problem from*/
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    transform: translateY(-20px);
 }
-
 
 input:focus {
 	outline-color: var(--c5);
@@ -319,7 +321,7 @@ form input{
 	height: 30px;
 	margin: 5px 0;
 	padding: 0 10px;
-	border: 1px solid var(----c5);
+	border: 1px solid var(--c5);
 	background: var(--c3);
 	color: var(--white);
 }
@@ -642,7 +644,7 @@ input:focus{
 	height: 30px;
 	margin: 5px 0;
 	padding: 0 10px;
-	border: 1px solid var(----c5);
+	border: 1px solid var(--c5);
 	background: var(--c3);
 	color: var(--white);
 }
@@ -652,7 +654,7 @@ input:focus{
 	height: 30px;
 	margin: 5px 0;
 	padding: 4.5px 10px;
-	border: 1px solid var(----c5);
+	border: 1px solid var(--c5);
 	background: var(--c3);
 	color: var(--white);
 
@@ -664,7 +666,7 @@ input:focus{
 	height: 100px;
 	margin: 5px 0 0 0;
 	padding: 5px 10px;
-	border: 1px solid var(----c5);
+	border: 1px solid var(--c5);
 	background: var(--c3);
 	color: var(--white);
 	transition: all 0.2s;
@@ -685,12 +687,18 @@ input:focus{
 #cart-total{
 	display: block;
 	text-align: center;
-	color:black;
-	background-color: white;
-	width: 15px;
+	color: var(--c5);
+	background-color: var(--c3);
+	border-color: var(--c4);
+	width: 20px;
 	height: 20px;
-	border-radius: 30%;
-	font-size: 14px;
+	border-radius: 100%;
+	border-width: 1px;
+	border-style: solid;
+	position: relative;
+	transform: translateX(15px) translateY(16px);
+	z-index: 2;
+	font-size: 12px;
 }
 .quantity{
 	display: inline-block;
@@ -710,3 +718,4 @@ input:focus{
 .chg-quantity:hover{
 	opacity: .6;
 }
+

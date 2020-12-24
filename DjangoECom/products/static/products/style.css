@@ -8,7 +8,6 @@
 	--black: #000;
 	--error: #F00;
 }
-
 /* width */
 ::-webkit-scrollbar {
 	width: 4px;
@@ -44,11 +43,11 @@ body{
 
 /*padding was 20 before the animated logo*/
 .navbar{
-	display: flex;
-	align-items: center;
-	padding: 0px;
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    transform: translateY(-20px);
 }
-
 
 input:focus {
 	outline-color: var(--c5);
@@ -319,7 +318,7 @@ form input{
 	height: 30px;
 	margin: 5px 0;
 	padding: 0 10px;
-	border: 1px solid var(----c5);
+	border: 1px solid var(--c5);
 	background: var(--c3);
 	color: var(--white);
 }
@@ -637,7 +636,7 @@ input:focus{
 	height: 30px;
 	margin: 5px 0;
 	padding: 0 10px;
-	border: 1px solid var(----c5);
+	border: 1px solid var(--c5);
 	background: var(--c3);
 	color: var(--white);
 }
@@ -647,7 +646,7 @@ input:focus{
 	height: 30px;
 	margin: 5px 0;
 	padding: 4.5px 10px;
-	border: 1px solid var(----c5);
+	border: 1px solid var(--c5);
 	background: var(--c3);
 	color: var(--white);
 
@@ -659,7 +658,7 @@ input:focus{
 	height: 100px;
 	margin: 5px 0 0 0;
 	padding: 5px 10px;
-	border: 1px solid var(----c5);
+	border: 1px solid var(--c5);
 	background: var(--c3);
 	color: var(--white);
 	transition: all 0.2s;
@@ -711,3 +710,4 @@ input:focus{
 .chg-quantity:hover{
 	opacity: .6;
 }
+

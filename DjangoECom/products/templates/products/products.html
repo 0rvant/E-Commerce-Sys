@@ -1,5 +1,6 @@
 {% extends "products/main.html" %}
 {% load static %}
+{% load currency %}
 
 {% block NavBar %}
 	{% if request.user.is_authenticated %}
@@ -61,9 +62,9 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
-                        <a  data-product={{product.id}} data-action="add" class="btn_allproducts update-cart" href="">Add to Cart</a>
+                        <a data-product={{product.id}} data-action="add" class="btn_allproducts update-cart">Add to Cart</a>
                     </div>
-                    <p><strong> ${{product.price|floatformat:2}} </strong></p>
+                    <p><strong> {{product.price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
                 </div>
             {% endfor %}
         </div>
@@ -106,4 +107,5 @@
   
 	<br>    
 </div>
+<br><br>
 {% endblock body%}
