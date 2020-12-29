@@ -6,3 +6,4 @@ from products.models import *
 admin.site.register(Customer)
 admin.site.register(WishList)
 admin.site.register(WishListItem)
+admin.site.register(ShippingAddress)

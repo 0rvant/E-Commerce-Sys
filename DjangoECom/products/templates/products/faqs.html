@@ -1,0 +1,65 @@
+{% extends "products/main.html" %}
+{% load static %}
+{% load currency %}
+
+{% block NavBar %}
+	{% if request.user.is_authenticated %}
+		<li><a href="{% url 'index' %}">Home</a></li>
+		<li><a href="{% url 'products' %}">Products</a></li>
+		{% if request.user.customer.isseller == True %}
+			<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		{% endif %}
+		<li><a href="">About</a></li>
+		<li><a href="">Contact</a></li>
+		<li><p id="cart-total">{{cartItems}}</p>
+			<a href="{% url 'cart' %}"><img src="{% static 'users/images/cartIcon.svg' %}" alt="cart icon" style="position: relative; transform: translateY(6px)" width="30px"class="icon"></a>
+		<li><img src="{{request.user.customer.image.url}}" alt="profile pic" id="SellerImg" onclick="dropMenu()">
+			<ul id="navDropdownMenu">
+				<li><a href="{% url 'wishlist' %}">Wishlist</a></li>
+				<li>Help</li>
+				<li><a href="{% url 'profile' %}">Profile</a></li>
+				<hr>
+				<li><a href="{% url 'logout' %}">Logout</a></li>
+			</ul>
+		</li>
+	{% else %}
+		<li><a href="{% url 'index' %}">Home</a></li>
+		<li><a href="{% url 'products' %}">Products</a></li>
+		<li><a href="">About</a></li>
+		<li><a href="">Contact</a></li>
+		<li><a href="{% url 'account' %}">Account</a></li>
+	{% endif %}
+{% endblock NavBar %}
+
+{% block body%}
+<div class="box">
+   <p class="heading">FAQs</p>
+   <div class="faqs">
+      <details>
+         <summary>What is Lorem ipsum?</summary>
+         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </details>
+      <details>
+         <summary>What is Lorem ipsum?</summary>
+         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </details>
+      <details>
+         <summary>What is Lorem ipsum?</summary>
+         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </details>
+	    <details>
+         <summary>What is Lorem ipsum?</summary>
+         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </details>
+	    <details>
+         <summary>What is Lorem ipsum?</summary>
+         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </details>
+	    <details>
+         <summary>What is Lorem ipsum?</summary>
+         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </details>
+
+   </div>
+</div>
+{% endblock body%}

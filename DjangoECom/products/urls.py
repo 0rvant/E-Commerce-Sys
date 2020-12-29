@@ -17,6 +17,7 @@ urlpatterns = [
     path('addProduct',views.addProduct, name="addProduct"),
 
     path('profile',views.profile, name="profile"),
+    path('faqs',views.faqs, name="faqs"),
 
     path('updateProfile',views.updateProfile, name="updateProfile"),
 

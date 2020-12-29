@@ -56,7 +56,6 @@
 			console.log('Cart Created!', cart)
 			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 		}
-		console.log('Cart:', cart)
 
 	</script>
 </head>
@@ -103,7 +102,7 @@
 				<div class="footer-col-1">
 					<h3>Ask us</h3>
 					<!--class txtglowhover added 12/12-->
-					<a href="" class="txtglowhover">Frequently asked questions.</a>
+					<a href="{% url 'faqs' %}" class="txtglowhover">Frequently asked questions.</a>
 				</div>
 				<div class="footer-col-2">
 					<img src="../../static/users/images/logo.svg" alt="logo">
@@ -145,6 +144,5 @@
 	<script type="text/javascript" src="{% static 'products/js/lottie.js' %}"></script>
 	<script type="text/javascript" src="{% static 'products/js/logo.js' %}"></script>
 	<script type="text/javascript" src="{% static 'products/js/cart.js' %}"> </script>
-
 </body>
 </html>

@@ -13,7 +13,8 @@ from currencies.models import Currency
 # Create your views here.
 def index(request):
     return render(request, "users/index.html")
-
+def faqs(request):
+    return render(request, "products/faqs.html")
 def products(request):  #Products_Store
     products_list = Product.objects.all()
     if request.user.is_authenticated:
@@ -21,7 +22,9 @@ def products(request):  #Products_Store
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         cartItems = order.get_cart_items
     else:
-        cartItems=0
+        items=[]
+        order={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
+        cartItems=order['get_cart_items']
     # Paginator for products 
     page = request.GET.get('page', 1)
     paginator = Paginator(products_list, 8) #number of products in one page = 8
@@ -41,12 +44,11 @@ def products(request):  #Products_Store
 def productDetails(request):  #Products_Store
     productId=request.GET['productId']
     product=Product.objects.get(id=productId)
-    if request.user.is_authenticated:
-        customer=request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        cartItems = order.get_cart_items
-    else:
-        cartItems=0
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+
     currency_code = request.session['currency']
     currency = Currency.objects.get(code=currency_code)
     #we need to send all Category here to choose one form them in forntend
@@ -55,15 +57,11 @@ def productDetails(request):  #Products_Store
 
 #@allowed_users(allowed_roles=['customer'])
 def cart(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order,created = Order.objects.get_or_create(customer=customer,complete=False)
-        items =order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        items=[]
-        order ={'get_cart_total':0,'get_cart_items':0}
-        cartItems = 0
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+
     currency_code = request.session['currency']
     currency = Currency.objects.get(code=currency_code)
     context ={'items':items , 'order':order, 'cartItems':cartItems, 'currency':currency}
