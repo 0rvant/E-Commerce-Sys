@@ -37,12 +37,16 @@
     <h2 class="row row-2"> All Products</h2>
     <div class="row_allproducts">
 		<label for="productsCategory">Category:</label>
+
+        <form id="categoryform" action="{% url 'category' %}" method="get">
 		<select name="productsCategory" id="productsCategory" required class="txtglowhover">
 			<option value="all products">All products</option>
-            {% for Category in menu_category %}
-            <option value="all products">{{ Category.title }}</option>
+            {% for Category in categories %}
+            <option value={{Category}} class="category-type">{{Category}}</option>
             {% endfor %}
 		</select>
+            <button type="submit" class="btn_allproducts" style=" width:80px ;height:25px;"name="regSubmitBtn">Choose</button>
+        </form>
     </div>
     <div class="small-container">
         <div class="row">

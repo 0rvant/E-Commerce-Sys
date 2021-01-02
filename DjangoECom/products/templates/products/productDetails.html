@@ -76,72 +76,32 @@
 
 
  <!-- Recommended products -->
-
-
 	<div class="small-container">
-		<div>
-			<h2>Recommended Products</h2>
-			<a href="products.html"><p class="txtglowhover">View more</p></a>
-		</div>
- 		<div class="row">
- 			<div class="col-4">
- 				<img src="images/Product2Photo1.jpg">
- 				<h4>Red Printed T-Shirt</h4>
- 				<div class="rating">
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
-					<i class="fa fa-star-o"></i>
-					<a href="" class="btn_allproducts">Add to Cart</a>
- 				</div>
- 				<p>150.00 L.E.</p>
- 			</div>
-  			<div class="col-4">
- 				<img src="images/Product3Photo1.jpg">
- 				<h4>Red Printed T-Shirt</h4>
- 				<div class="rating">
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
-					<i class="fa fa-star-half-o"></i>
-					<i class="fa fa-star-o"></i>
-					<a href="" class="btn_allproducts">add to cart</a>
- 				</div>
- 				<p>220.00 L.E.</p>
- 			</div>
- 			 <div class="col-4">
- 				<img src="images/Product4Photo1.jpg">
- 				<h4>Red Printed T-Shirt</h4>
- 				<div class="rating">
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star-o"></i>
-					<i class="fa fa-star-o"></i>
-					<a href="" class="btn_allproducts">add to cart</a>
- 				</div>
- 				<p>180.0 L.E.0</p>
- 			</div>
- 			 <div class="col-4">
- 				<img src="images/Product5Photo1.jpg">
- 				<h4>Red Printed T-Shirt</h4>
- 				<div class="rating">
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
-					<i class="fa fa-star-half-o"></i>
-					<a href="" class="btn_allproducts">add to cart</a>
- 				</div>
- 				<p>200.00 L.E.</p>
- 			</div>
- 		</div>
- 	</div>
+		<h2>Recommended Products</h2>
+        <div class="row">
+            {% for product in products %}
+                <div class="col-4">
+
+                    <form id="{{product.id}}" action="{% url 'product_details' %}" method="get">
+                        <input type="hidden" name="productId" value="{{product.id}}">
+                        <a href="javascript:{}" onclick="document.getElementById('{{product.id}}').submit();" ><img src="{{product.image.url}}"></a>
+                    </form>
+
+                    <h4><strong> {{product.name}} </strong></h4>
+                        <div class="rating" >
+
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <a data-product={{product.id}} data-action="add" class="btn_allproducts update-cart">Add to Cart</a>
+                    </div>
+                    <p><strong> {{product.price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
 </div>
-
-
-
-
 {% endblock body%}  

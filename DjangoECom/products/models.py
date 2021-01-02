@@ -14,9 +14,9 @@ class Product(models.Model):
         ('B', 'Best Selling')
     )
     category_choices = (
-        ('C', 'Clothes'),
-        ('M', 'Mobiles'),
-        ('T', 'TVs')
+        ('Clothes', 'Clothes'),
+        ('Mobiles', 'Mobiles'),
+        ('TVs', 'TVs')
     )
     seller = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
@@ -28,7 +28,7 @@ class Product(models.Model):
     image = models.ImageField(blank=True, null=True,upload_to='media/')
     date_created = models.DateField(auto_now_add=True, null=True)
     label = models.CharField(choices=label_choices, max_length=1, default='S')
-    category = models.CharField(choices=category_choices, max_length=2, null=True)
+    category = models.CharField(choices=category_choices, max_length=20, null=True)
     review = models.FloatField(default=0)
 
     def __str__(self):

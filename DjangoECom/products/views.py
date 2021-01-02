@@ -16,7 +16,12 @@ def index(request):
 def faqs(request):
     return render(request, "products/faqs.html")
 def products(request):  #Products_Store
-    products_list = Product.objects.all()
+    categories=['Clothes','Mobiles','TVs']
+    category=request.GET.get('productsCategory')
+    if(category in categories):
+        products_list = Product.objects.filter(category=category)
+    else:
+        products_list = Product.objects.all()
     if request.user.is_authenticated:
         customer=request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -38,7 +43,7 @@ def products(request):  #Products_Store
     currency_code = request.session['currency']
     currency = Currency.objects.get(code=currency_code)
     #we need to send all Category here to choose one form them in forntend
-    context = {'products':products, 'cartItems':cartItems, 'currency':currency}
+    context = {'products':products, 'cartItems':cartItems, 'currency':currency,'categories':categories}
     return render(request, 'products/products.html', context)
 
 def productDetails(request):  #Products_Store
@@ -48,11 +53,12 @@ def productDetails(request):  #Products_Store
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
-
+    category=product.category
+    recommended=Product.objects.filter(category=category)
     currency_code = request.session['currency']
     currency = Currency.objects.get(code=currency_code)
     #we need to send all Category here to choose one form them in forntend
-    context = {'product':product, 'cartItems':cartItems, 'currency':currency}
+    context = {'product':product, 'cartItems':cartItems, 'currency':currency,'products':recommended}
     return render(request, 'products/productDetails.html', context)
 
 #@allowed_users(allowed_roles=['customer'])
