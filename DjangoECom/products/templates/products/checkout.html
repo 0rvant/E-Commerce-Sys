@@ -94,8 +94,12 @@
 					<div style="flex:1"><p>x{{item.quantity}}</p></div>
 				</div>
 				{% endfor %}
-				<h5>Items:   {{order.get_cart_items}}</h5>
-				<h5>Total:   ${{order.get_cart_total|floatformat:2}}</h5>
+				<h3>Items:        {{order.get_cart_items}}</h3>
+				{% if request.user.customer.new == True%}
+				<h3>Total After Discount: ${{order.get_cart_total_discount|floatformat:2}}</h3>
+				{% else %}
+				<h3>Total: ${{order.get_cart_total|floatformat:2}}</h3>
+				{% endif %}
 			</div>
 		</div>
 	</div>
@@ -103,6 +107,9 @@
 
 	<script>
 		var total = '{{order.get_cart_total}}'
+		if ('{{request.user.customer.new}}' == 'True'){
+		 	total = '{{order.get_cart_total_discount}}'
+		}
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
 

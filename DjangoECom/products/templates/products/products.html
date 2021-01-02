@@ -68,7 +68,12 @@
                         <i class="fa fa-star-o"></i>
                         <a data-product={{product.id}} data-action="add" class="btn_allproducts update-cart">Add to Cart</a>
                     </div>
+                    {% if request.user.customer.new == True and product.discount_price < product.price %}
                     <p><strong> {{product.price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
+                    <p><strong style="color:red;">Offer Price {{product.discount_price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
+                     {% else %}
+                    <p><strong> {{product.price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>

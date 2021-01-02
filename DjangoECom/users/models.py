@@ -9,6 +9,7 @@ class Customer(models.Model):
     isseller = models.BooleanField(default=False)
     image = models.ImageField(default="profile_pic.png")
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE, default='USD')
+    new = models.BooleanField(default = True, null=True, blank =False)
 
     def __str__(self):
         return self.user.username

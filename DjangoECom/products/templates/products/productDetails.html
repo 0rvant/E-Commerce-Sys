@@ -57,9 +57,13 @@
 					<i class="fa fa-star-half-o"></i>
 					<i class="fa fa-star-o"></i>
 				</div>
-				<h5>In stock: {{product.quantity}}</h5>
-				<h4><strong> {{product.price|currency:currency.code |floatformat:2}}{{ currency.symbol }} </strong></h4>
-				<!-- product size  missing -->
+				<h4>In stock: {{product.quantity}}</h4>
+                    {% if request.user.customer.new == True and product.discount_price < product.price %}
+                    <p><strong> {{product.price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
+                    <p><strong style="color:red;">Offer Price {{product.discount_price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
+                     {% else %}
+                    <p><strong> {{product.price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
+                    {% endif %}				<!-- product size  missing -->
 				<a data-product={{product.id}} data-action="add" class="btn update-cart">Add to Cart</a>
 				<a data-product={{product.id}} data-action="add" class="btn update-wishlist">Add to Wishlist</a>
 				<h3>{{ product.description }}</h3>
@@ -79,15 +83,17 @@
 	<div class="small-container">
 		<h2>Recommended Products</h2>
         <div class="row">
-            {% for product in products %}
+            {% for recproduct in products %}
+			{% if recproduct.id == product.id %}
+			{% else %}
                 <div class="col-4">
 
-                    <form id="{{product.id}}" action="{% url 'product_details' %}" method="get">
-                        <input type="hidden" name="productId" value="{{product.id}}">
-                        <a href="javascript:{}" onclick="document.getElementById('{{product.id}}').submit();" ><img src="{{product.image.url}}"></a>
+                    <form id="{{recproduct.id}}" action="{% url 'product_details' %}" method="get">
+                        <input type="hidden" name="productId" value="{{recproduct.id}}">
+                        <a href="javascript:{}" onclick="document.getElementById('{{recproduct.id}}').submit();" ><img src="{{recproduct.image.url}}"></a>
                     </form>
 
-                    <h4><strong> {{product.name}} </strong></h4>
+                    <h4><strong> {{recproduct.name}} </strong></h4>
                         <div class="rating" >
 
                         <i class="fa fa-star"></i>
@@ -95,10 +101,16 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
-                        <a data-product={{product.id}} data-action="add" class="btn_allproducts update-cart">Add to Cart</a>
+                        <a data-product={{recproduct.id}} data-action="add" class="btn_allproducts update-cart">Add to Cart</a>
                     </div>
-                    <p><strong> {{product.price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
-                </div>
+                    {% if request.user.customer.new == True and recproduct.discount_price < recproduct.price %}
+                    <p><strong> {{recproduct.price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
+                    <p><strong style="color:red;">Offer Price {{recproduct.discount_price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
+                     {% else %}
+                    <p><strong> {{recproduct.price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
+                    {% endif %}
+				</div>
+			{% endif %}
             {% endfor %}
         </div>
     </div>

@@ -111,7 +111,6 @@ def updateItem(request):
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
-
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -120,10 +119,6 @@ def processOrder(request):
 
     total = float(data['form']['total'])
     order.transaction_id = transaction_id
-
-    if total == order.get_cart_total:
-        order.complete = True
-    order.save()
 
     if order.shipping == True:
         ShippingAddress.objects.create(
@@ -134,8 +129,22 @@ def processOrder(request):
             state=data['shipping']['state'],
             zipcode=data['shipping']['zipcode'],
         )
+        message = 'Payment Failed'
+    if(customer.new==True):
+         if total == order.get_cart_total_discount:
+            order.complete = True
+            message='Payment Succeeded'
+            customer.new=False
+            customer.save()
+    else:
+        if total == order.get_cart_total:
+            order.complete = True
+            message='Payment Succeeded'
+            customer.new = False
+            customer.save()
+    order.save()
 
-    return JsonResponse('Payment submitted..', safe=False)
+    return JsonResponse(message, safe=False)
 
 def dashboard(request):  #Products_Store
     seller=request.user
