@@ -785,3 +785,59 @@ details{
 details summary{
    outline: none;
 }
+
+.rating-star {
+    direction: rtl;
+    font-size: 35px;
+    unicode-bidi: bidi-override;
+    display: inline-block;
+}
+.rating-star input {
+    opacity: 0;
+    position: relative;
+    left: -30px;
+    z-index: 2;
+    cursor: pointer;
+}
+.rating-star span.star:before {
+    color: #777777;
+}
+.rating-star span.star {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    position: relative;
+    z-index: 1;
+}
+.rating-star span {
+    margin-left: -5px;
+}
+.rating-star span.star:before {
+    color: #777777;
+    content:"\f006";
+}
+.rating-star input:hover + span.star:before, .rating-star input:hover + span.star ~ span.star:before, .rating-star input:checked + span.star:before, .rating-star input:checked + span.star ~ span.star:before {
+    color: var(--c5);
+    content:"\f005";
+}
+ 
+.selected-rating{
+    color: var(--c5);
+    font-weight: bold;
+    font-size: 42px;
+}
+.rate_form .input
+{
+	width: 90%;
+	height: 30px;
+	margin: 5px 0;
+	padding: 0 10px;
+	border: 1px solid var(--c5);
+	background: var(--c3);
+	color: var(--white);
+}
+.product_label{
+	background: var(--c5);
+	color: var(--c3);
+}

@@ -9,9 +9,9 @@ from users.models import Customer
 
 class Product(models.Model):
     label_choices = (
-        ('S', 'Standard'),
-        ('N', 'New'),
-        ('B', 'Best Selling')
+        ('Standard', 'Standard'),
+        ('New', 'New'),
+        ('Best Selling', 'Best Selling')
     )
     category_choices = (
         ('Clothes', 'Clothes'),
@@ -27,9 +27,9 @@ class Product(models.Model):
     description = models.TextField(max_length=500, null=True)
     image = models.ImageField(blank=True, null=True,upload_to='media/')
     date_created = models.DateField(auto_now_add=True, null=True)
-    label = models.CharField(choices=label_choices, max_length=1, default='S')
+    label = models.CharField(choices=label_choices, max_length=20, default='New')
     category = models.CharField(choices=category_choices, max_length=20, null=True)
-    review = models.FloatField(default=0)
+    total_review = models.IntegerField(default=1)
 
     def __str__(self):
         return self.name
@@ -42,6 +42,25 @@ class Product(models.Model):
             url = ''
         return url
 
+class Review(models.Model):
+    STATUS = (
+        ('True','True'),
+        ('False','False'),
+        ('New','New'),
+    )
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=250, blank=True)
+    status = models.CharField(max_length=20, choices=STATUS, default='New')
+    subject = models.CharField(max_length=50, blank=True)
+    ip = models.CharField(max_length=20, blank=True)
+    rate = models.IntegerField(default=1)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.user.username
+    
 class Order(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.SET_NULL, blank=True,null=True)
     date_ordered=models.DateTimeField(auto_now_add=True)

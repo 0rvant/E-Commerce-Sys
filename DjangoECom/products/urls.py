@@ -26,4 +26,6 @@ urlpatterns = [
 
     path('update_wishlist', views.UpdateWishList, name="update_wishlist"),
     path('wishlist', views.ViewWishList, name="wishlist"),
+
+    path('add_review/<int:id>', views.add_review, name='add_review'),
 ]

@@ -10,6 +10,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.storage import FileSystemStorage
 from products.models import *
 from currencies.models import Currency
+from django.contrib import messages
+from django.forms import ModelForm
+import requests
+
 # Create your views here.
 def index(request):
     return render(request, "users/index.html")
@@ -57,8 +61,9 @@ def productDetails(request):  #Products_Store
     recommended=Product.objects.filter(category=category)
     currency_code = request.session['currency']
     currency = Currency.objects.get(code=currency_code)
+    reviews=Review.objects.filter(product_id=productId, status='True')
     #we need to send all Category here to choose one form them in forntend
-    context = {'product':product, 'cartItems':cartItems, 'currency':currency,'products':recommended}
+    context = {'product':product, 'cartItems':cartItems, 'currency':currency,'products':recommended, 'reviews':reviews}
     return render(request, 'products/productDetails.html', context)
 
 #@allowed_users(allowed_roles=['customer'])
@@ -270,3 +275,26 @@ def ViewWishList(request):
     items =wishList.wishlistitem_set.all()
     context ={'items':items , 'wishList':wishList, 'cartItems':cartItems}
     return render(request, 'products/wishlist.html',context)
+
+class ReviewForm(ModelForm):
+    class Meta:
+        model = Review 
+        fields = ['subject', 'comment', 'rate']
+
+def add_review(request, id):
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            data = Review()
+            data.subject = form.cleaned_data['subject']
+            data.comment = form.cleaned_data['comment']
+            data.rate = form.cleaned_data['rate']
+            data.ip = request.META.get('REMOTE_ADDR')
+            data.product_id = id
+            user = request.user
+            data.user_id = user.id
+            data.save()
+            messages.success(request, "Your review has been sent. Thank you for your interest.")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER')) 
