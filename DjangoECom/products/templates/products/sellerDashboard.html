@@ -65,12 +65,11 @@
 
                     <h4><strong> {{product.name}} </strong></h4>
                         <div class="rating" >
-
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
+						<i class="fa fa-star{% if product.total_review < 0.5 %}-o empty{% elif product.total_review < 1 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.total_review < 1.5 %}-o empty{% elif product.total_review < 2 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.total_review < 2.5 %}-o empty{% elif product.total_review < 3 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.total_review < 3.5 %}-o empty{% elif product.total_review < 4 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.total_review < 4.5 %}-o empty{% elif product.total_review < 5 %}-half-o{% endif %}"></i>>
                     </div>
 					<form id="ed{{product.id}}" action="{% url 'editProductView' %}" method="get">
                         <input type="hidden" name="productId" value="{{product.id}}">

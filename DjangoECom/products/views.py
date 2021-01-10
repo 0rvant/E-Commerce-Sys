@@ -13,19 +13,45 @@ from currencies.models import Currency
 from django.contrib import messages
 from django.forms import ModelForm
 import requests
+import datetime
+from datetime import timezone
 
 # Create your views here.
 def index(request):
     return render(request, "users/index.html")
 def faqs(request):
-    return render(request, "products/faqs.html")
+    if request.user.is_authenticated:
+        customer=request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        items=[]
+        order={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
+        cartItems=order['get_cart_items']
+    return render(request, "products/faqs.html", {'cartItems': cartItems})
 def products(request):  #Products_Store
-    categories=['Clothes','Mobiles','TVs']
+    categories=['Clothes','Mobiles','TVs','Video games and Consols','PC']
     category=request.GET.get('productsCategory')
     if(category in categories):
         products_list = Product.objects.filter(category=category)
     else:
         products_list = Product.objects.all()
+
+    for product in products_list:
+        #Calculate the average rate for the product.
+        reviews=Review.objects.filter(product_id=product.id)
+        if len(reviews)!=0:
+            product.total_review = 0
+            for review in reviews:
+                product.total_review+=review.rate
+            product.total_review/=len(reviews)
+        else:
+            product.total_review = 0
+        diff = (datetime.datetime.now(timezone.utc) - product.date_created).total_seconds()
+        if (diff > 172800) & (product.label == "New"):
+            product.label = "Standard"
+        product.save()
+
     if request.user.is_authenticated:
         customer=request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -154,9 +180,17 @@ def processOrder(request):
 def dashboard(request):  #Products_Store
     seller=request.user
     products=seller.product_set.all()
+    if request.user.is_authenticated:
+        customer=request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        items=[]
+        order={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
+        cartItems=order['get_cart_items']
     currency_code = request.session['currency']
     currency = Currency.objects.get(code=currency_code)
-    context = {'products':products,'seller':seller, 'currency':currency}
+    context = {'products':products,'seller':seller, 'currency':currency, 'cartItems': cartItems}
     return render(request, 'products/sellerDashboard.html', context)
 
 
@@ -189,7 +223,6 @@ def addProduct(request):  #Products_Store
     discount_price = request.POST["discountPercentage"]
     description=request.POST["Description"]
     category = request.POST["category"]
-    label = "S"
     if(productId=="null"):
 
         product = Product.objects.create(
@@ -200,7 +233,6 @@ def addProduct(request):  #Products_Store
             description=description,
             image=image,
             category=category,
-            label=label,
             seller=seller
         )
         product.save()
@@ -213,7 +245,6 @@ def addProduct(request):  #Products_Store
             description=description,
             image=image,
             category=category,
-            label=label,
             seller=seller
         )
 
@@ -225,7 +256,15 @@ def addProduct(request):  #Products_Store
 
 def profile(request):
     user=request.user
-    context = {'user': user}
+    if request.user.is_authenticated:
+        customer=request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        items=[]
+        order={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
+        cartItems=order['get_cart_items']
+    context = {'user': user, 'cartItems': cartItems}
     return render(request,'products/profile.html', context)
 
 def updateProfile(request):
@@ -294,6 +333,7 @@ def add_review(request, id):
             user = request.user
             data.user_id = user.id
             data.save()
+            
             messages.success(request, "Your review has been sent. Thank you for your interest.")
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

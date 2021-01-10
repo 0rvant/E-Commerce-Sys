@@ -4,12 +4,12 @@
 	--c3: #1F2833;
 	--c4: #45A29E;
 	--c5: #66FCF1;
-	--white: #FFF;
+	--c6: #6300ee;
+	--c7: #ff0266;
+	--white: #ffffff;
 	--black: #000;
 	--error: #F00;
-
 }
-
 /* width */
 ::-webkit-scrollbar {
 	width: 4px;
@@ -45,7 +45,6 @@ body{
 
 /*padding was 20 before the animated logo*/
 .navbar{
-	/*logo problem from*/
     display: flex;
     align-items: center;
     padding: 0px;
@@ -150,6 +149,17 @@ h1{
 	padding-left: 25px;
 	padding-right: 25px;
 }
+.Review-container{
+	background-color: var(--c1);
+	max-width: 1300px;
+	margin: auto;
+	padding-left: 25px;
+	padding-right: 25px;	
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
 .row{
 	display: flex;
 	align-items: center;
@@ -180,6 +190,7 @@ h1{
 	animation-name: btnHoverout;
 	animation-duration: 0.5s;
 	animation-direction: revert;
+	cursor: pointer;
 }
 
 
@@ -468,6 +479,7 @@ td img{
 	animation-name: btnHoverout;
 	animation-duration: 0.5s;
 	animation-direction: revert;
+	cursor: pointer;
 }
 .btn_allproducts:hover{
 	background: var(--c5);
@@ -615,15 +627,10 @@ input:focus{
 }
 
 .col-2 #SellerImg {
-	width: 70%;
-	height: 70%;
+	width: 300px;
+	height: 300px;
 	border-radius: 100%;
 	object-fit: cover;
-}
-
-.sellerdata{
-	position: relative;
-	transform: translateX(-180px);
 }
 
 .addproductform-container{
@@ -719,3 +726,136 @@ input:focus{
 	opacity: .6;
 }
 
+/* --------------------------------For Checkout---------------------------*/
+.col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
+	margin-top: 10px;
+	width: 45%;
+}
+
+.btn{
+	border-radius: 0;
+}
+
+.row-image{
+	width: 100px;
+	height: 100px;
+}
+
+.cart-row{
+	display: flex;
+    align-items: flex-stretch;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ececec;
+
+}
+.hidden{
+	display: none!important;
+}
+
+
+
+
+/*----------------------------FAQs-------------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
+.box{
+   width: 100%;
+   margin: 100px auto;
+   background: var(--c3);
+   border-radius: 7px;
+   box-shadow: 1px 2px 4px rgba(0,0,0,.3);
+}
+
+.box .heading{
+   background: var(--c4);
+   border-radius: 7px 7px 0px 0px;
+   padding: 10px;
+   color:var(--c1);
+   text-align: center;
+   font-family: "Rubik";
+   font-size: 30px;
+}
+
+.faqs{
+   padding: 0px 20px 20px;
+}
+
+::-webkit-details-marker{
+   float: right;
+   margin-top: 3px;
+}
+
+details{
+   background: var(--c1);
+   padding: 10px 20px;
+   border-radius: 7px;
+   margin-top: 20px;
+   font-family: "Rubik";
+   font-size: 20px;
+   letter-spacing: 3px;
+   cursor: pointer;
+}
+
+details summary{
+   outline: none;
+}
+
+.rating-star {
+    direction: rtl;
+    font-size: 35px;
+    unicode-bidi: bidi-override;
+    display: inline-block;
+}
+.rating-star input {
+    opacity: 0;
+    position: relative;
+    left: -30px;
+    z-index: 2;
+    cursor: pointer;
+}
+.rating-star span.star:before {
+    color: var(--c5)
+}
+.rating-star span.star {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    position: relative;
+    z-index: 1;
+}
+.rating-star span {
+    margin-left: -5px;
+}
+.rating-star span.star:before {
+    color: var(--c5);
+    content:"\f006";
+}
+.rating-star input:hover + span.star:before, .rating-star input:hover + span.star ~ span.star:before, .rating-star input:checked + span.star:before, .rating-star input:checked + span.star ~ span.star:before {
+    color: var(--c5);
+    content:"\f005";
+}
+ 
+.selected-rating{
+    color: var(--c5);
+    font-weight: bold;
+    font-size: 42px;
+}
+.rate_form .input
+{
+	width: 90%;
+	height: 30px;
+	margin: 5px 0;
+	padding: 0 10px;
+	border: 1px solid var(--c5);
+	background: var(--c3);
+	color: var(--white);
+}
+.product_label{
+	background: var(--c6);
+	color: var(--c2);
+	padding: 3px;
+	font-size: 15px;
+	border-radius: 5px;
+}

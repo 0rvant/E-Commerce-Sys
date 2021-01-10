@@ -58,14 +58,18 @@
                         <a href="javascript:{}" onclick="document.getElementById('{{product.id}}').submit();" ><img src="{{product.image.url}}"></a>
                     </form>
 
-                    <h4><strong> {{product.name}} </strong>   <label class="product_label">{{ product.label }}</label></h4>
+                    <h4> {{product.name}} </h4>
+                    {% if product.label != 'Standard' %}
+                        <label class="product_label"><strong>{{ product.label }}</strong></label>
+                    {% endif %}
+
                         <div class="rating" >
                         
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
+						<i class="fa fa-star{% if product.total_review < 0.5 %}-o empty{% elif product.total_review < 1 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.total_review < 1.5 %}-o empty{% elif product.total_review < 2 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.total_review < 2.5 %}-o empty{% elif product.total_review < 3 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.total_review < 3.5 %}-o empty{% elif product.total_review < 4 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.total_review < 4.5 %}-o empty{% elif product.total_review < 5 %}-half-o{% endif %}"></i>>
                         <a data-product={{product.id}} data-action="add" class="btn_allproducts update-cart">Add to Cart</a>
                     </div>
                     {% if request.user.customer.new == True and product.discount_price < product.price %}

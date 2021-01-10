@@ -51,11 +51,11 @@
 				<h1> {{ product.name }}</h1>
 				<h3> By Seller:  {{ product.seller }}</h3>
 				<div class="rating">
-					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
- 					<i class="fa fa-star"></i>
-					<i class="fa fa-star-half-o"></i>
-					<i class="fa fa-star-o"></i>
+						<i class="fa fa-star{% if product.total_review < 0.5 %}-o empty{% elif product.total_review < 1 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.total_review < 1.5 %}-o empty{% elif product.total_review < 2 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.total_review < 2.5 %}-o empty{% elif product.total_review < 3 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.total_review < 3.5 %}-o empty{% elif product.total_review < 4 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.total_review < 4.5 %}-o empty{% elif product.total_review < 5 %}-half-o{% endif %}"></i>
 				</div>
 				<h4>In stock: {{product.quantity}}</h4>
                     {% if request.user.customer.new == True and product.discount_price < product.price %}
@@ -71,68 +71,7 @@
 				<p></p>
 			</div>  
 		</div>
-		<div class="row">
-			<div class="col-2">
-				{% for review in reviews %}
-					<div class="single_review">
-						<div class="review_header">
-							<div><a href="#"><i class="fa fa-user-o"></i> {{ review.user.first_name }} </a> </div>
-							<div><b>{{ review.subject }}</b> </div>
-							<div class="review_rating">
-								<i class="fa fa-star{% if review.rate < 1 %}-o empty{% endif %}"></i>
-								<i class="fa fa-star{% if review.rate < 2 %}-o empty{% endif %}"></i>
-								<i class="fa fa-star{% if review.rate < 3 %}-o empty{% endif %}"></i>
-								<i class="fa fa-star{% if review.rate < 4 %}-o empty{% endif %}"></i>
-								<i class="fa fa-star{% if review.rate < 5 %}-o empty{% endif %}"></i>
-							</div>
-						</div>
-						<div class="review_body">
-							{{ review.comment }}
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-			<div class="col-2">
-				<h4>Write Your Review</h4>
-				{% if messages %}
-					{% for message in messages %}
-						<div class="alert alert-success" role="alert">
-							{{ message }}
-						</div>
-					{% endfor %}
-				{% endif %}
-				<form class="rate_form" action="/products/add_review/{{ product.id }}" method="post">
-					{% csrf_token %}
-					<div>
-						<input name="subject" class="input" type="text" placeholder="Your Subject"/>
-					</div>
-
-					<div>
-						<textarea name="comment" class="input" placeholder="Your Review"></textarea>
-					</div>
-
-					<div>
-						<strong>Your Rating: </strong>
-						<div id="rating-form"> 
-							<span class="rating-star">
-								<input type="radio" name="rate" value="5"><span class="star"></span>
-								<input type="radio" name="rate" value="4"><span class="star"></span>
-								<input type="radio" name="rate" value="3"><span class="star"></span>
-								<input type="radio" name="rate" value="2"><span class="star"></span>
-								<input type="radio" name="rate" value="1"><span class="star"></span>
-							</span>
-						</div>
-					</div>
-					{% if request.user is not None %}
-						<button type="submit" class="btn">Submit</button>
-						{% else %}
-							You must be logged in to post a review.
-					{% endif %}
-				</form>
-			</div>
-		</div>
-	</div>
-
+		
 	<!--------------------------------- Title ------------------------------> 
 
 	<br><br><br>
@@ -154,15 +93,14 @@
                     </form>
 
                     <h4><strong> {{recproduct.name}} </strong></h4>
-                        <div class="rating" >
-
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <a data-product={{recproduct.id}} data-action="add" class="btn_allproducts update-cart">Add to Cart</a>
-                    </div>
+					<div class="rating">
+						<i class="fa fa-star{% if recproduct.total_review < 0.5 %}-o empty{% elif recproduct.total_review < 1 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if recproduct.total_review < 1.5 %}-o empty{% elif recproduct.total_review < 2 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if recproduct.total_review < 2.5 %}-o empty{% elif recproduct.total_review < 3 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if recproduct.total_review < 3.5 %}-o empty{% elif recproduct.total_review < 4 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if recproduct.total_review < 4.5 %}-o empty{% elif recproduct.total_review < 5 %}-half-o{% endif %}"></i>
+						<a data-product={{recproduct.id}} data-action="add" class="btn_allproducts update-cart">Add to Cart</a>
+					</div>
                     {% if request.user.customer.new == True and recproduct.discount_price < recproduct.price %}
                     <p><strong> {{recproduct.price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
                     <p><strong style="color:red;">Offer Price {{recproduct.discount_price|currency:currency.code |floatformat:2}} {{ currency.symbol }} </strong></p>
@@ -175,5 +113,75 @@
         </div>
     </div>
 </div>
-<br><br><br>
+<br>
+
+ <!-- Review products -->
+<div class="small-container">
+		<div class="col-2">
+			<h4>Write Your Review</h4>
+			{% if messages %}
+				{% for message in messages %}
+					<div class="alert alert-success" role="alert">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endif %}
+			<form class="rate_form" action="/products/add_review/{{ product.id }}" method="post">
+				{% csrf_token %}
+				<div>
+					<input name="subject" class="input" type="text" placeholder="Your Subject"/>
+				</div>
+
+				<div>
+					<textarea name="comment" class="input" placeholder="Your Review"></textarea>
+				</div>
+
+				<div class="rating">
+					<strong>Your Rating: </strong>
+					<div id="rating-form"> 
+						<span class="rating-star">
+							<input type="radio" name="rate" value="5"><span class="star"></span>
+							<input type="radio" name="rate" value="4"><span class="star"></span>
+							<input type="radio" name="rate" value="3"><span class="star"></span>
+							<input type="radio" name="rate" value="2"><span class="star"></span>
+							<input type="radio" name="rate" value="1"><span class="star"></span>
+						</span>
+					</div>
+				</div>
+				{% if request.user is not None %}
+					<button type="submit" class="btn" style="width:160px; height:34px; font-size:12px">Submit</button>
+					{% else %}
+						You must be logged in to post a review.
+				{% endif %}
+			</form>
+		</div>
+		<div class="col-2">
+			{% for review in reviews %}
+				<div class="single_review">
+					<div class="review_header">
+						<div><a href="#"><i class="fa fa-user-o"></i> {{ review.user.first_name }} </a> <i class="fa fa-clock-o">{{ review.create_at }}</i></div>
+						<div><b>{{ review.subject }}</b> </div>
+						<div class="rating">
+							<i class="fa fa-star{% if review.rate < 1 %}-o empty{% endif %}"></i>
+							<i class="fa fa-star{% if review.rate < 2 %}-o empty{% endif %}"></i>
+							<i class="fa fa-star{% if review.rate < 3 %}-o empty{% endif %}"></i>
+							<i class="fa fa-star{% if review.rate < 4 %}-o empty{% endif %}"></i>
+							<i class="fa fa-star{% if review.rate < 5 %}-o empty{% endif %}"></i>
+						</div>
+					</div>
+					<div class="review_body">
+						{{ review.comment }}
+					</div>
+				</div>
+				{% empty %}
+					<div class="single_review">
+						<p>No reviews yet...</p>
+					</div>
+				<br>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+<br><br><br>	
+
 {% endblock body%}  

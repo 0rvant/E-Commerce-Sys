@@ -38,23 +38,24 @@
 				<th>Wishlist</th>
 			</tr>
 			<tr>
-                {% for item in items %}
-				<td>
-					<div class="cart-info">
-						<img src="{{item.product.imageURL}}">
-						<div>
-							<p>{{ item.product.name }}</p>
-							<small>${{item.product.price|floatformat:2}}</small>
-							<br>
-                            <img data-product="{{item.product.id}}" data-action="delete" class="chg-quantity update-wishlist" src="{% static  'products/images/remove.png' %}">
+				{% for item in items %}
+					<td>
+						<div class="cart-info">
+							<img src="{{item.product.imageURL}}">
+							<div>
+								<p>{{ item.product.name }}</p>
+								<small>${{item.product.price|floatformat:2}}</small>
+								<br>
+								<img data-product="{{item.product.id}}" data-action="delete" class="chg-quantity update-wishlist" src="{% static  'products/images/remove.png' %}">
+							</div>
 						</div>
-					</div>
-				</td>
-                {% endfor %}
+					</td>
+				{% endfor %}
 			</tr>
 		</table>
 		<br>
 	</div>
 	<br><br>
 </div>
+<br><br>
 {% endblock body%}

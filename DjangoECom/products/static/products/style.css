@@ -4,7 +4,9 @@
 	--c3: #1F2833;
 	--c4: #45A29E;
 	--c5: #66FCF1;
-	--white: #FFF;
+	--c6: #6300ee;
+	--c7: #ff0266;
+	--white: #ffffff;
 	--black: #000;
 	--error: #F00;
 }
@@ -147,6 +149,17 @@ h1{
 	padding-left: 25px;
 	padding-right: 25px;
 }
+.Review-container{
+	background-color: var(--c1);
+	max-width: 1300px;
+	margin: auto;
+	padding-left: 25px;
+	padding-right: 25px;	
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
 .row{
 	display: flex;
 	align-items: center;
@@ -177,6 +190,7 @@ h1{
 	animation-name: btnHoverout;
 	animation-duration: 0.5s;
 	animation-direction: revert;
+	cursor: pointer;
 }
 
 
@@ -465,6 +479,7 @@ td img{
 	animation-name: btnHoverout;
 	animation-duration: 0.5s;
 	animation-direction: revert;
+	cursor: pointer;
 }
 .btn_allproducts:hover{
 	background: var(--c5);
@@ -800,7 +815,7 @@ details summary{
     cursor: pointer;
 }
 .rating-star span.star:before {
-    color: #777777;
+    color: var(--c5)
 }
 .rating-star span.star {
     display: inline-block;
@@ -814,7 +829,7 @@ details summary{
     margin-left: -5px;
 }
 .rating-star span.star:before {
-    color: #777777;
+    color: var(--c5);
     content:"\f006";
 }
 .rating-star input:hover + span.star:before, .rating-star input:hover + span.star ~ span.star:before, .rating-star input:checked + span.star:before, .rating-star input:checked + span.star ~ span.star:before {
@@ -838,6 +853,9 @@ details summary{
 	color: var(--white);
 }
 .product_label{
-	background: var(--c5);
-	color: var(--c3);
+	background: var(--c6);
+	color: var(--c2);
+	padding: 3px;
+	font-size: 15px;
+	border-radius: 5px;
 }

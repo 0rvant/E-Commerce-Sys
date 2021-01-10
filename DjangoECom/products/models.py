@@ -16,20 +16,22 @@ class Product(models.Model):
     category_choices = (
         ('Clothes', 'Clothes'),
         ('Mobiles', 'Mobiles'),
-        ('TVs', 'TVs')
+        ('TVs', 'TVs'),
+        ('Video games and Consols', 'Video games and Consols'),
+        ('PC', 'PC'),
     )
     seller = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField(blank=False)
     digital = models.BooleanField(default = False, null=True, blank =False)
     quantity = models.IntegerField()    
-    discount_price = models.FloatField(null=True, blank=True)
+    discount_price = models.FloatField(null=True, blank=False)
     description = models.TextField(max_length=500, null=True)
     image = models.ImageField(blank=True, null=True,upload_to='media/')
-    date_created = models.DateField(auto_now_add=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
     label = models.CharField(choices=label_choices, max_length=20, default='New')
-    category = models.CharField(choices=category_choices, max_length=20, null=True)
-    total_review = models.IntegerField(default=1)
+    category = models.CharField(choices=category_choices, max_length=50, null=True)
+    total_review = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
@@ -58,8 +60,6 @@ class Review(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.user.username
     
 class Order(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.SET_NULL, blank=True,null=True)
