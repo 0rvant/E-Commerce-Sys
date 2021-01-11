@@ -126,7 +126,7 @@ def account_view(request):
 
 def logout(request):
     django_logout(request)
-    return render(request, "users/account.html")
+    return HttpResponseRedirect(reverse("index"))
 
 def selectcurrency(request):
     if request.method == 'POST':

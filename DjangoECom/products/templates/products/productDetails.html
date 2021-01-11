@@ -148,12 +148,13 @@
 						</span>
 					</div>
 				</div>
-				{% if request.user is not None %}
+				{% if request.user.id is not None %}
 					<button type="submit" class="btn" style="width:160px; height:34px; font-size:12px">Submit</button>
 					{% else %}
 						You must be logged in to post a review.
 				{% endif %}
 			</form>
+			<br>
 		</div>
 		<div class="col-2">
 			{% for review in reviews %}
@@ -172,6 +173,7 @@
 					<div class="review_body">
 						{{ review.comment }}
 					</div>
+					<br>
 				</div>
 				{% empty %}
 					<div class="single_review">
@@ -180,6 +182,7 @@
 				<br>
 			{% endfor %}
 		</div>
+		<br>
 	</div>
 </div>
 <br><br><br>	
