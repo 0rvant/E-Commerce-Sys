@@ -44,19 +44,27 @@
 							{% csrf_token %}
                     <label class="btn" for="profileImg" style="width:160px; height:34px; font-size:12px">Change Picture</label>
                     <input hidden type="file" id="profileImg" name="profileImg" required accept="image/*">
-                        <button type="submit" class="btn" style="position: absolute; width:160px;transform: translateX(10px) ;height:34px; font-size:12px"name="regSubmitBtn">Submit</button>
+                        <button type="submit" class="btn" style="position: absolute; width:160px;transform: translateX(10px) ;height:34px; font-size:12px"name="submit" value="editimg">Submit</button>
                     </form>
 					<br>
 
                 </div>
-
                 <div class="col-2">
-                   <ul style="font-size:20px">
+                   <ul  style="font-size:20px">
                         <li><b>Name: </b> {{user.first_name}}  {{user.last_name}}</li>
                         <li><b>User Name: </b> {{user.username}}</li>
                        <li><b>Email: </b> {{user.email}} </li>
                        <li><b>Phone Number: </b> {{user.customer.phone}}</li>
-                    </ul>
+									<form id="RegForm"  action="{% url 'account' %}" method="post" autocomplete="off">
+							{% csrf_token %}
+							<li><input style="width: 60%;" type="text" placeholder="First name" name="regFirstName"></li>
+							<li><input style="width: 60%;" type="text" placeholder="Last name" name="regLastName"></li>
+							<li><input style="width: 60%;" type="text" placeholder="User name" name="regUserName"></li>
+							<li><input style="width: 60%;" type="email" placeholder="Email address" name="regEmailAddress"></li>
+							<li><input style="width: 60%;" type="text" placeholder="Phone number" name="regPhoneNumber"></li>
+							<li><button style="width: 60%;" type="submit" class="btn" name="submit" value="editinfo">Edit</button></li>
+						</form>
+					   </ul>
                 </div>
             </div>
 	   </div>
