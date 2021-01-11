@@ -35,31 +35,12 @@
 <div class="box">
    <p class="heading">FAQs</p>
    <div class="faqs">
+	   {% for faq in faqs %}
       <details>
-         <summary>What is Lorem ipsum?</summary>
-         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+         <summary style="color:#45A29E; margin-bottom: 10px;">{{faq.question}}</summary>
+         <p class="text" style="color:#C5C6C7;margin-bottom: 10px;">{{faq.answer}}</p>
       </details>
-      <details>
-         <summary>What is Lorem ipsum?</summary>
-         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </details>
-      <details>
-         <summary>What is Lorem ipsum?</summary>
-         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </details>
-	    <details>
-         <summary>What is Lorem ipsum?</summary>
-         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </details>
-	    <details>
-         <summary>What is Lorem ipsum?</summary>
-         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </details>
-	    <details>
-         <summary>What is Lorem ipsum?</summary>
-         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </details>
-
+	   {% endfor %}
    </div>
 </div>
 {% endblock body%}
