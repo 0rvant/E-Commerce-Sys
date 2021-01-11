@@ -55,7 +55,7 @@
                         <li><b>User Name: </b> {{user.username}}</li>
                        <li><b>Email: </b> {{user.email}} </li>
                        <li><b>Phone Number: </b> {{user.customer.phone}}</li>
-									<form id="RegForm"  action="{% url 'account' %}" method="post" autocomplete="off">
+					   <form id="RegForm"  action="{% url 'updateProfile' %}" method="post" autocomplete="off">
 							{% csrf_token %}
 							<li><input style="width: 60%;" type="text" placeholder="First name" name="regFirstName"></li>
 							<li><input style="width: 60%;" type="text" placeholder="Last name" name="regLastName"></li>

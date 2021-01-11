@@ -273,7 +273,9 @@ def profile(request):
 
 def updateProfile(request):
     customer=request.user.customer
+    user=request.user
     customerId=customer.id
+    userId=user.id
 
     if request.POST['submit'] == 'editimg':
         uploaded_file = request.FILES['profileImg']
@@ -291,16 +293,17 @@ def updateProfile(request):
         phone = request.POST["regPhoneNumber"]
 
         Customer.objects.filter(id=customerId).update(
+            phone=phone,
+        )
+        User.objects.filter(id=userId).update(
             username=username,
             email=email,
             first_name=firstname,
             last_name=secondname,
-            phone=phone,
         )
-    customer.save()
     user=request.user
     context = {'user': user}
-    return render(request,'products/profile.html', context)
+    return render(request,'users/index.html', context)
 
 
 def UpdateWishList(request):
