@@ -275,15 +275,29 @@ def updateProfile(request):
     customer=request.user.customer
     customerId=customer.id
 
-    uploaded_file = request.FILES['profileImg']
-    fs = FileSystemStorage()
-    fs.save(uploaded_file.name, uploaded_file)
-    image = uploaded_file.name
+    if request.POST['submit'] == 'editimg':
+        uploaded_file = request.FILES['profileImg']
+        fs = FileSystemStorage()
+        fs.save(uploaded_file.name, uploaded_file)
+        image = uploaded_file.name
+        Customer.objects.filter(id=customerId).update(
+            image=image,
+        )
+    else:
+        firstname = request.POST["regFirstName"]
+        secondname = request.POST["regLastName"]
+        username = request.POST["regUserName"]
+        email = request.POST["regEmailAddress"]
+        phone = request.POST["regPhoneNumber"]
 
-    Customer.objects.filter(id=customerId).update(
-        image=image,
-    )
-
+        Customer.objects.filter(id=customerId).update(
+            username=username,
+            email=email,
+            first_name=firstname,
+            last_name=secondname,
+            phone=phone,
+        )
+    customer.save()
     user=request.user
     context = {'user': user}
     return render(request,'products/profile.html', context)
