@@ -24,13 +24,17 @@ def faqs(request):
         customer=request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         cartItems = order.get_cart_items
+        faqs=Faqs.objects.all()
+        context = {'cartItems': cartItems,'faqs':faqs}
     else:
+        faqs=Faqs.objects.all()
         items=[]
         order={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
         cartItems=order['get_cart_items']
-    return render(request, "products/faqs.html", {'cartItems': cartItems})
+        context = {'cartItems': cartItems, 'faqs': faqs}
+    return render(request, "products/faqs.html", context)
 def products(request):  #Products_Store
-    categories=['Clothes','Mobiles','TVs','Video games and Consols','PC']
+    categories=['Clothes','Mobiles','TVs','VideoGamesAndConsols','PC']
     category=request.GET.get('productsCategory')
     if(category in categories):
         products_list = Product.objects.filter(category=category)

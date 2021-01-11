@@ -17,7 +17,7 @@ class Product(models.Model):
         ('Clothes', 'Clothes'),
         ('Mobiles', 'Mobiles'),
         ('TVs', 'TVs'),
-        ('Video games and Consols', 'Video games and Consols'),
+        ('VideoGamesAndConsols', 'VideoGamesAndConsols'),
         ('PC', 'PC'),
     )
     seller = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
@@ -139,3 +139,8 @@ class WishList(models.Model):
 class WishListItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
     wishList = models.ForeignKey(WishList, on_delete=models.SET_NULL, blank=True, null=True)
+
+class Faqs(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    question = models.TextField(max_length=250, blank=True)
+    answer = models.TextField(max_length=250, blank=True)
