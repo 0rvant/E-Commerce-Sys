@@ -4,7 +4,7 @@
 
 [![MIT License][license-shield]][license-url]
 
-[![Product Name Screen Shot][logo]]
+[![logo][logo]]
 <!-- PROJECT LOGO -->
 <p align="center">
   
@@ -118,9 +118,9 @@ This is an example of how to list things you need to use the software and how to
    4-When adding dolar currency check Active, Base and Default boxes
    ```
   .
-[![Product Name Screen Shot][groups]]
+[![groups][groups]]
   .
-[![Product Name Screen Shot][currency]]
+[![currency][currency]]
 
 6. You can use this paypal sandbox account in chekout
    ```sh
@@ -191,7 +191,5 @@ Project Link: [https://github.com/MostafaSamyFayez/E-Commerce-Sys](https://githu
 [license-url]: https://github.com/MostafaSamyFayez/E-Commerce-Sys
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://github.com/MostafaSamyFayez/E-Commerce-Sys
-[product-screenshot]: images/screenshot.png
-[groups]: images/groups.png
-[currency]: images/currency.png
-[logo]: images/logo.png
+[product-screenshot]: images/screenshot.PNG
+[logo]: images/logo.PNG
