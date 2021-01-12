@@ -8,7 +8,7 @@
 <!-- PROJECT LOGO -->
 <p align="center">
   
-  <h3 align="center">AlyaCom E-Commerece Website</h3>
+  <h2 align="center">AlyaCom E-Commerece Website</h3>
 
   <p align="center">
     An E-Comerece website to buy or sell your products here
@@ -45,6 +45,10 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+The System (“إلياكم”) that is an E-commerce website provides online products where seller or system administrator can put on the website to be bought by buyer through credit card or pay-pal with the selected currency.
+User has his/her own profile through which he/she can buy/sell/browse products.
+User can add products which he/she intend to pay later to wish-list.
+System also suggests a recommended product based on the historical browsing of the user or based on his/her activity. System shows products with their price, name, image, and review.
 
 [![Product Name Screen Shot][product-screenshot]](https://github.com/MostafaSamyFayez/E-Commerce-Sys)
 
@@ -117,9 +121,9 @@ This is an example of how to list things you need to use the software and how to
    3-Add Groups and currencies as shown below
    4-When adding dolar currency check Active, Base and Default boxes
    ```
-  .
+.
 [![groups][groups]]
-  .
+.
 [![currency][currency]]
 
 6. You can use this paypal sandbox account in chekout
@@ -193,3 +197,5 @@ Project Link: [https://github.com/MostafaSamyFayez/E-Commerce-Sys](https://githu
 [linkedin-url]: https://github.com/MostafaSamyFayez/E-Commerce-Sys
 [product-screenshot]: images/screenshot.PNG
 [logo]: images/logo.PNG
+[groups]: images/groups.PNG
+[currency]: images/currency.PNG
