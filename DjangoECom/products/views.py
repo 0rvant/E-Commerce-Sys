@@ -17,8 +17,6 @@ import datetime
 from datetime import timezone
 
 # Create your views here.
-def index(request):
-    return render(request, "users/index.html")
 def faqs(request):
     if request.user.is_authenticated:
         customer=request.user.customer
@@ -74,8 +72,11 @@ def products(request):  #Products_Store
     except EmptyPage:
         products_list = paginator.page(paginator.num_pages)
 
-    currency_code = request.session['currency']
-    currency = Currency.objects.get(code=currency_code)
+    try:
+        currency_code = request.session['currency']
+        currency = Currency.objects.get(code=currency_code)
+    except:
+        currency = Currency.objects.get(code="USD")
     #we need to send all Category here to choose one form them in forntend
     context = {'products':products, 'cartItems':cartItems, 'currency':currency,'categories':categories}
     return render(request, 'products/products.html', context)

@@ -27,7 +27,7 @@ class Product(models.Model):
     quantity = models.IntegerField()    
     discount_price = models.FloatField(null=True, blank=False)
     description = models.TextField(max_length=500, null=True)
-    image = models.ImageField(blank=True, null=True,upload_to='media/')
+    image = models.ImageField(blank=True, null=True,upload_to='media/', default="empty_img.png")
     date_created = models.DateTimeField(auto_now_add=True)
     label = models.CharField(choices=label_choices, max_length=20, default='New')
     category = models.CharField(choices=category_choices, max_length=50, null=True)
